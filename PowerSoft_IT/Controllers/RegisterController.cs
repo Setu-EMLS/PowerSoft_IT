@@ -2,7 +2,7 @@
 
 namespace PowerSoft_IT.Controllers
 {
-    public class Registarcs : Controller
+    public class RegisterController : Controller
     {
         public IActionResult Index()
         {

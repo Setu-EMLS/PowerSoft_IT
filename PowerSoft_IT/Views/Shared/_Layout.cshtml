@@ -12,13 +12,13 @@
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+    <!-- AOS CDN JS File -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- Font awesome CDN  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+    <script src="~/js/site.js"></script>
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 </head>
@@ -38,18 +38,18 @@
                     <li><a href="/" class="active">Home<br></a></li>
                     <li><a href="/aboutUs">About Us</a></li>
                     <li><a href="/courses">Courses</a></li>
-                    <li><a href="trainers.html">Students Feedback</a></li>
+                    <li><a href="/studentsFeedback">Students Feedback</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/product">Product</a></li>
                     <li><a href="/contactUs">Contact</a></li>
                     <li class="dropdown">
                         <span>Join</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
                         <ul>
-                            <li><a href="/Login/index" >Register</a></li>
-                            <li><a href="/Login/index">Login</a></li>
+                            <li><a asp-controller="Register" asp-action="index">Register</a></li>
+                            <li><a asp-controller="Login" asp-action="index">Login</a></li>
                         </ul>
                     </li>
-                    
+
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -59,10 +59,10 @@
         </div>
     </header>
     <!--fixed Social media link -->
-  
-        
+
+
     <div>
-         @RenderBody()
+        @RenderBody()
     </div>
 
     <footer id="footer" class="footer position-relative" style="background: #8acff1;">
@@ -157,5 +157,11 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- AOS CDN JS File -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
