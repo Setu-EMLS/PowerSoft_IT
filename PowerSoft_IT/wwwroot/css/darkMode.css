@@ -1,0 +1,210 @@
+﻿/* General Body and Container for Social Links (Left Side, Text Slides Right) */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    /* Removed justify-content/align-items from body if content takes up full width
+       and we're using a fixed social bar. */
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5; /* Light mode default */
+    color: #333; /* Default text color for light mode */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
+}
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+        background-color: #1a1a1a;
+        color: #f0f2f5;
+    }
+
+        body.dark-mode .section {
+            background-color: #2c2c2c; /* Adjust section backgrounds for dark mode */
+            color: #f0f2f5;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .section-title h2,
+        body.dark-mode .section-title p {
+            color: #f0f2f5;
+        }
+
+        body.dark-mode .btn-get-started,
+        body.dark-mode .btn-get-started1 {
+            border-color: #f0f2f5;
+            color: #f0f2f5;
+        }
+
+            body.dark-mode .btn-get-started:hover,
+            body.dark-mode .btn-get-started1:hover {
+                background-color: #f0f2f5;
+                color: #1a1a1a;
+            }
+
+        body.dark-mode .course-item,
+        body.dark-mode .member,
+        body.dark-mode .why-box,
+        body.dark-mode .icon-box,
+        body.dark-mode .features-item,
+        body.dark-mode .stats-item {
+            background-color: #3a3a3a; /* Darker background for cards/boxes */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #f0f2f5;
+            border: 1px solid #555;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode p,
+        body.dark-mode span,
+        body.dark-mode a:not(.social-link) {
+            color: inherit; /* Inherit color from parent (body.dark-mode) */
+        }
+
+
+/* Social Media Links Container - Fixed on Left */
+.social-links-container {
+    position: fixed; /* Fixes it on the screen */
+    top: 50%; /* Center vertically */
+    left: 0; /* Align to the left edge */
+    transform: translateY(-50%); /* Adjust for perfect vertical centering */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 5px; /* Rounded corners only on relevant sides */
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+    z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+/* Dark mode for social links container */
+body.dark-mode .social-links-container {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+
+.social-link {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse; /* Icon on right, text on left */
+    justify-content: flex-end; /* Align content (text and icon) to the right within the link */
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    margin: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 60px; /* Initial width to show only the icon */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+    .social-link i {
+        font-size: 24px;
+        margin-left: 0px; /* No left margin initially */
+        transition: margin-left 0.3s ease;
+    }
+
+.social-text {
+    position: absolute;
+    right: 60px; /* Position text to the left of the icon's initial width */
+    opacity: 0; /* Hide text initially */
+    transition: right 0.3s ease, opacity 0.3s ease;
+    font-weight: bold;
+}
+
+/* Hover effect */
+.social-link:hover {
+    width: 180px; /* Expanded width on hover (adjust as needed) */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+    .social-link:hover .social-text {
+        right: 80px; /* Move text to the left on hover (adjust this value) */
+        opacity: 1; /* Show text on hover */
+    }
+
+    .social-link:hover i {
+        margin-left: 15px; /* Add margin to the icon on hover to separate it from text */
+    }
+
+/* Specific colors for each social media link */
+.social-link.facebook {
+    background-color: #3b5998;
+}
+
+.social-link.twitter {
+    background-color: #00acee;
+}
+
+.social-link.instagram {
+    background-color: #E1306C;
+}
+
+.social-link.linkedin {
+    background-color: #0e76a8;
+}
+
+.social-link.youtube {
+    background-color: #FF0000;
+}
+
+/* Dark Mode and Language controls styling */
+.theme-and-lang-controls {
+    position: fixed; /* Fixes it on the screen */
+    top: 20px; /* Adjust top position */
+    right: 20px; /* Align to the right */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between toggle and dropdown */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Adjust Bootstrap colors for dark mode if needed, or define custom ones */
+body.dark-mode .btn-secondary {
+    background-color: #555;
+    border-color: #666;
+    color: #f0f2f5;
+}
+
+    body.dark-mode .btn-secondary:hover {
+        background-color: #666;
+        border-color: #777;
+    }
+
+body.dark-mode .dropdown-menu {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+body.dark-mode .dropdown-item {
+    color: #f0f2f5;
+}
+
+    body.dark-mode .dropdown-item:hover,
+    body.dark-mode .dropdown-item:focus {
+        background-color: #555;
+        color: #f0f2f5;
+    }
+
+body.dark-mode .form-check-label {
+    color: #f0f2f5;
+}
+
+/* For your existing sections, ensure they adapt to dark mode */
+.section {
+    background-color: #fff; /* Default light background */
+    padding: 60px 0; /* Example padding */
+    margin-bottom: 20px; /* Space between sections */
+}
+
+/* Specific overrides for sections that already have a dark background */
+.dark-background {
+    background-color: #333; /* Example for hero section */
+    color: #fff;
+}
+
+body.dark-mode .dark-background {
+    background-color: #1a1a1a; /* Even darker in dark mode for contrast */
+}

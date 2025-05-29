@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "User Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card p-3">
+    <h6 class="card-title">User Management</h6>
+    <table id="userTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>Admin</td>
+                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>Instructor</td>
+                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

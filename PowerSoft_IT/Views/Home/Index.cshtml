@@ -1,0 +1,588 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+  <style>
+    .social-links-container {
+        display: flex;
+        flex-direction: column;
+        position: fixed;      /* Fixed position */
+        left: 0;              /* Stick to left side */
+        bottom: 20px;         /* 60px from bottom */
+        z-index: 9999;        /* Stay on top */
+        overflow: hidden;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        text-decoration: none;
+        color: white;
+        padding: 8px 8px;
+        margin: 0;
+        transition: all 0.3s ease;
+        position: relative;
+        width: 45px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .social-link i {
+        font-size: 18px;
+        margin-left: 0;
+        transition: margin-left 0.3s ease;
+    }
+
+    .social-text {
+        position: absolute;
+        right: 60px;
+        opacity: 0;
+        transition: right 0.3s ease, opacity 0.3s ease;
+        font-weight: bold;
+    }
+
+    .social-link:hover {
+        width: 220px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-link:hover .social-text {
+        right: 80px;
+        opacity: 1;
+        color:white;
+    }
+
+    .social-link:hover i {
+        margin-left: 15px;
+        color:white;
+    }
+
+    .social-link.facebook { background-color: #3b5998; }
+    .social-link.twitter { background-color: #00acee; }
+    .social-link.instagram { background-color: #E1306C; }
+    .social-link.linkedin { background-color: #0e76a8; }
+    .social-link.youtube { background-color: #FF0000; }
+  </style>
+<main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+        <img src="~/images/background/10235254.jpg" alt="" data-aos="fade-in" style="height:90vh;">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-delay="100">Learning Today,<br>Leading Tomorrow</h2>
+            <p data-aos="fade-up text-white" data-aos-delay="200">With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules.</p>
+            <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+
+                <a href="courses.html" class="btn-get-started1" style="margin-right:10px;">Browse Courses</a>
+                <a href="courses.html" class="btn-get-started ml-3">Join Free Seminar</a>
+            </div>
+        </div>
+    </section><!-- Hero Section -->
+    <div class="social-links-container">
+        <a href="#" class="social-link facebook">
+            <span class="social-text">Facebook</span>
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="social-link twitter">
+            <span class="social-text">Twitter</span>
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="social-link instagram">
+            <span class="social-text">Instagram</span>
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="social-link linkedin">
+            <span class="social-text">LinkedIn</span>
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-link youtube">
+            <span class="social-text">YouTube</span>
+            <i class="fab fa-youtube"></i>
+        </a>
+    </div>
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
+                    <img src="~/images/aboutUs/hero-right.png" class="img-fluid" alt="">
+                </div>
+
+                <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Become an IT Professional</h3>
+                    <p class="fst-italic">
+                        With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+                        <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+                        <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                    </ul>
+                    <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section><!-- /About Section -->
+    <!-- Counts Section -->
+    <section id="counts" class="section counts light-background">
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+                        <p>Students</p>
+                    </div>
+                </div><!-- End Stats Item -->
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+                        <p>Courses</p>
+                    </div>
+                </div><!-- End Stats Item -->
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+                        <p>Events</p>
+                    </div>
+                </div><!-- End Stats Item -->
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
+                        <p>Trainers</p>
+                    </div>
+                </div><!-- End Stats Item -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Counts Section -->
+    <!-- Why Us Section -->
+    <section id="why-us" class="section why-us">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="why-box">
+                        <h3>Why Choose Our Products?</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                            Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                        </p>
+                        <div class="text-center">
+                            <a href="#" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div><!-- End Why Box -->
+
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
+
+                        <div class="col-xl-4">
+                            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                                <i class="bi bi-clipboard-data"></i>
+                                <h4>Corporis voluptates officia eiusmod</h4>
+                                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                                <i class="bi bi-gem"></i>
+                                <h4>Ullamco laboris ladore pan</h4>
+                                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
+                            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                                <i class="bi bi-inboxes"></i>
+                                <h4>Labore consequatur incidid dolore</h4>
+                                <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section><!-- /Why Us Section -->
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="features-item shadow">
+                        <i class="bi bi-browser-edge" style="color: #ffbb2c;"></i>
+                        <h3><a href="" class="stretched-link">Web Application Development with ASP .NET</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="features-item shadow">
+                        <i class="bi bi-file-earmark-spreadsheet" style="color: #5578ff;"></i>
+                        <h3>
+                            <a href="" class="stretched-link">
+                                Excel
+                            </a>
+                        </h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="features-item shadow">
+                        <i class="bi bi-brush" style="color: #e80368;"></i>
+                        <h3><a href="" class="stretched-link">Graphic Design</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="features-item shadow">
+                        <i class="bi bi-megaphone" style="color: #e361ff;"></i>
+                        <h3>
+                            <a href="" class="stretched-link">
+                                Digital_Marketing
+                            </a>
+                        </h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="features-item shadow">
+                        <i class="bi bi-pc-display-horizontal" style="color: #47aeff;"></i>
+                        <h3><a href="" class="stretched-link">
+                                Computer Fundamental
+                            </a>
+                        </h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="features-item shadow">
+                        <i class="bi bi-router" style="color: #ffa76e;"></i>
+                        <h3><a href="" class="stretched-link"> Networking</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
+                    <div class="features-item shadow">
+                        <i class="bi bi-android2" style="color: #11dbcf;"></i>
+                        <h3><a href="" class="stretched-link">Mobile App Development </a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="features-item shadow">
+                        <i class="bi bi-pc-display" style="color: #4233ff;"></i>
+                        <h3>
+                            <a href="" class="stretched-link">
+                                Web Design & development
+                            </a>
+                        </h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
+                    <div class="features-item shadow">
+                        <i class="bi bi-command" style="color: #b2904f;"></i>
+                        <h3><a href="" class="stretched-link"> ACAD</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="features-item shadow">
+                        <i class="bi bi-database" style="color: #b20969;"></i>
+                        <h3>
+                            <a href="" class="stretched-link">
+                                Database_Design & Development
+                            </a>
+                        </h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="features-item shadow">
+                        <i class="bi bi-camera-video" style="color: #ff5828;"></i>
+                        <h3><a href="" class="stretched-link">Video Editing </a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+                <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="features-item shadow">
+                        <i class="bi bi-brightness-high" style="color: #29cc61;"></i>
+                        <h3><a href="" class="stretched-link">SEO</a></h3>
+                    </div>
+                </div><!-- End Feature Item -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Features Section -->
+    <!-- Courses Section -->
+    <section id="courses" class="courses section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Courses</h2>
+            <p>Popular Courses</p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="course-item shadow">
+                        <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
+                        <div class="course-content">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <p class="category">Web Development</p>
+                                <p class="price">$169</p>
+                            </div>
+
+                            <h3><a href="course-details.html">Website Design</a></h3>
+                            <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                            <div class="trainer d-flex justify-content-between align-items-center">
+                                <div class="trainer-profile d-flex align-items-center">
+                                    <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
+                                    <a href="" class="trainer-link">Antonio</a>
+                                </div>
+                                <div class="trainer-rank d-flex align-items-center">
+                                    <i class="bi bi-person user-icon"></i>&nbsp;50
+                                    &nbsp;&nbsp;
+                                    <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Course Item-->
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="course-item shadow">
+                        <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
+                        <div class="course-content">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <p class="category">Marketing</p>
+                                <p class="price">$250</p>
+                            </div>
+
+                            <h3><a href="course-details.html">Search Engine Optimization</a></h3>
+                            <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                            <div class="trainer d-flex justify-content-between align-items-center">
+                                <div class="trainer-profile d-flex align-items-center">
+                                    <img src="assets/img/trainers/trainer-2-2.jpg" class="img-fluid" alt="">
+                                    <a href="" class="trainer-link">Lana</a>
+                                </div>
+                                <div class="trainer-rank d-flex align-items-center">
+                                    <i class="bi bi-person user-icon"></i>&nbsp;35
+                                    &nbsp;&nbsp;
+                                    <i class="bi bi-heart heart-icon"></i>&nbsp;42
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Course Item-->
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="course-item shadow">
+                        <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
+                        <div class="course-content">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <p class="category">Content</p>
+                                <p class="price">$180</p>
+                            </div>
+
+                            <h3><a href="course-details.html">Copywriting</a></h3>
+                            <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                            <div class="trainer d-flex justify-content-between align-items-center">
+                                <div class="trainer-profile d-flex align-items-center">
+                                    <img src="assets/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="">
+                                    <a href="" class="trainer-link">Brandon</a>
+                                </div>
+                                <div class="trainer-rank d-flex align-items-center">
+                                    <i class="bi bi-person user-icon"></i>&nbsp;20
+                                    &nbsp;&nbsp;
+                                    <i class="bi bi-heart heart-icon"></i>&nbsp;85
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Course Item-->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Courses Section -->
+
+    <section id="courseSection">
+        <div class="container">
+            <h1 class="text-center p-2 shadow section-title">
+                Join Our Free Seminar & Class
+            </h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/course/free course.jpg" />
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="row">
+                            <div class="col-md-5 p-1 shadow"><i class="fa-solid fa-fingerprint"></i></div>
+                            <div class="col-md-7">
+                                <h5>
+                                    Catch Your COURSE
+                                </h5>
+                                <p>
+                                    Check your skill level by taking free seminar & class. Find the courses you need and enhance your skills.Boost your professional skills.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 p-1 shadow"><i class="fa-solid fa-gift"></i></div>
+                            <div class="col-md-7">
+                                <h5>BUILD COMMUNITY</h5>
+                                <p>
+                                   Build your own community through free seminar & class. Where one student will assist another.
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Trainers Index Section -->
+    <section id="trainers-index" class="section trainers-index">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member shadow">
+                        <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+                        <div class="member-content">
+                            <h4>Walter White</h4>
+                            <span>Web Development</span>
+                            <p>
+                                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
+                            </p>
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member shadow">
+                        <img src="assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
+                        <div class="member-content">
+                            <h4>Sarah Jhinson</h4>
+                            <span>Marketing</span>
+                            <p>
+                                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
+                            </p>
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+                    <div class="member shadow">
+                        <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
+                        <div class="member-content">
+                            <h4>William Anderson</h4>
+                            <span>Content</span>
+                            <p>
+                                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
+                            </p>
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Trainers Index Section -->
+    <!-- Bank Section -->
+    <section id="payment-section" class="payment-section">
+        <div class="container">
+            <h1 class="text-center section-title" data-lang-key="acceptPaymentTitle">Accept Payment</h1>
+            <div class="payment-options-grid">
+                <div class="payment-card bank-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="card-title" data-lang-key="bankSectionTitle">Bank</h3>
+                    <div class="bank-details-wrapper">
+                        <div class="bank-details sonali">
+                            <h4 data-lang-key="sonaliBankName">Sonali Bank</h4>
+                            <p data-lang-key="accountName">Account Name : PowerSoftIT</p>
+                            <p data-lang-key="accountNoSonali">Account No : 4439602000928</p>
+                            <p data-lang-key="branchSonali">Branch : Mirpur-10</p>
+                        </div>
+
+                        <div class="bank-details dutch-bangla">
+                            <h4 data-lang-key="dutchBanglaBankName">Dutch Bangla Bank</h4>
+                            <p data-lang-key="accountNameDbbl">Account Name : PowerSoftIT</p>
+                            <p data-lang-key="accountNoDbbl">Account No : (Coming Soon)</p>
+                            <p data-lang-key="branchDbbl">Branch : Mirpur-10</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-card bkash-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="card-title" data-lang-key="bkashSectionTitle">Bkash</h3>
+                    <div class="bkash-details-wrapper">
+                        <div class="bkash-details merchant">
+                            <h4 data-lang-key="merchantNumberLabel">Merchant Number :</h4>
+                            <p data-lang-key="merchantNumber">01913168904</p>
+                        </div>
+                        <div class="bkash-details personal">
+                            <h4 data-lang-key="personalNumberLabel">Personal Number :</h4>
+                            <p data-lang-key="personalNumber">01771511805</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h6 class="card-title">Total Students</h6>
+            <p class="fs-4">1,200</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h6 class="card-title">Active Courses</h6>
+            <p class="fs-4">35</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h6 class="card-title">Pending Requests</h6>
+            <p class="fs-4">8</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6 class="card-title">Student Enrollments</h6>
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6 class="card-title">Course Popularity</h6>
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,105 @@
+﻿/*============================ Modal CSS ================================*/
+.modalCounter {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-contentCounter {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.closeCounter {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position:fixed;
+}
+
+.closeCounter:hover,
+.closeCounter:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeBtn{
+    font-size: 30px;
+    float: right;
+}
+.btnContainer{
+	display:flex;
+	justify-content:end;
+	align-items:end;
+}
+/*====================== Toast css ======================*/
+.error-box {
+	display: none;
+	color: #F9285A;
+	background: #FFEEF3;
+	border-left: 3px solid #F9285A;
+	width: 400px;
+	padding: 15px;
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	margin: 1% auto;
+	padding: 10px;
+}
+
+.error-box i {
+	color: #F9285A;
+	margin: 5px;
+	padding: 4px 6px;
+	border-radius: 50%;
+	background: #FDB2C5;
+}
+
+.error-box p {
+	color: #F9285A;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.success-box {
+	display: none;
+	color: #17C653;
+	background: #DFFFEA;
+	border-left: 3px solid #17C653;
+	width: 400px;
+	z-index: 1;
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	margin: 1% auto;
+	padding: 10px;
+}
+
+.success-box i {
+	margin: 5px;
+	padding: 4px 6px;
+	border-radius: 50%;
+	background: #A3EEBC;
+	color: #17C653;
+		}
+
+.success-box p {
+	color: #17C653;
+	padding-left: 20px;
+	padding-right: 20px;
+}
