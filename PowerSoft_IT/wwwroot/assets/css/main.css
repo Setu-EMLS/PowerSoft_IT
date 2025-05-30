@@ -866,35 +866,35 @@ section,
     position: relative;
 }
 
-    .section-title h2 {
-        font-size: 14px;
-        font-weight: 500;
-        padding: 0;
-        line-height: 1px;
-        margin: 0;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        color: color-mix(in srgb, var(--default-color), transparent 50%);
-        position: relative;
+.section-title h2 {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0;
+    line-height: 1px;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    position: relative;
+}
+
+    .section-title h2::after {
+        content: "";
+        width: 120px;
+        height: 1px;
+        display: inline-block;
+        background: var(--accent-color);
+        margin: 4px 10px;
     }
 
-        .section-title h2::after {
-            content: "";
-            width: 120px;
-            height: 1px;
-            display: inline-block;
-            background: var(--accent-color);
-            margin: 4px 10px;
-        }
-
-    .section-title p {
-        color: var(--heading-color);
-        margin: 0;
-        font-size: 36px;
-        font-weight: 700;
-        font-family: var(--nav-font);
-        text-transform: uppercase;
-    }
+.section-title p {
+    color: var(--heading-color);
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    font-family: var(--nav-font);
+    text-transform: uppercase;
+}
 
 /*--------------------------------------------------------------
 # Hero Section
@@ -910,78 +910,79 @@ section,
     color: var(--default-color);
 }
 
-    .hero img {
-        position: absolute;
-        inset: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1;
-    }
+.hero img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
 
-    .hero:before {
-        content: "";
-        background: color-mix(in srgb, var(--background-color), transparent 60%);
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-    }
+.hero:before {
+    content: "";
+    background: color-mix(in srgb, var(--background-color), transparent 60%);
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
 
-    .hero .container {
-        position: relative;
-        z-index: 3;
-    }
+.hero .container {
+    position: relative;
+    z-index: 3;
+}
 
-    .hero h2 {
-        margin: 0;
-        font-size: 48px;
-        font-weight: 700;
-    }
+.hero h2 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 700;
+}
 
-    .hero p {
-        color: color-mix(in srgb, var(--default-color), transparent 20%);
-        margin: 10px 0 0 0;
-        font-size: 24px;
-    }
+.hero p {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    margin: 10px 0 0 0;
+    font-size: 24px;
+}
 
-    .hero .btn-get-started {
-        font-weight: 500;
-        font-size: 15px;
-        letter-spacing: 1px;
-        display: inline-block;
-        padding: 8px 35px 10px 35px;
-        border-radius: 50px;
-        transition: 0.4s;
-        margin-top: 30px;
-        border: 2px solid var(--default-color);
-        color: var(--default-color);
-    }
+.hero .btn-get-started {
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 35px 10px 35px;
+    border-radius: 50px;
+    transition: 0.4s;
+    margin-top: 30px;
+    border: 2px solid var(--default-color);
+    color: var(--default-color);
+}
 
-        .hero .btn-get-started:hover {
-            background: var(--accent-color);
-            border: 2px solid var(--accent-color);
-        }
+.hero .btn-get-started:hover {
+    background: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    color:white;
+}
 
-    .hero .btn-get-started1 {
-        font-weight: 500;
-        font-size: 15px;
-        letter-spacing: 1px;
-        display: inline-block;
-        padding: 8px 35px 10px 35px;
-        border-radius: 50px;
-        transition: 0.4s;
-        margin-top: 30px;
-        background: var(--accent-color);
-        border: 2px solid var(--accent-color);
-        color: white;
-    }
+ .hero .btn-get-started1 {
+     font-weight: 500;
+     font-size: 15px;
+     letter-spacing: 1px;
+     display: inline-block;
+     padding: 8px 35px 10px 35px;
+     border-radius: 50px;
+     transition: 0.4s;
+     margin-top: 30px;
+     background: var(--accent-color);
+     border: 2px solid var(--accent-color);
+     color: white;
+ }
 
-        .hero .btn-get-started1:hover {
-            border: 2px solid var(--default-color);
-            color: var(--default-color);
-            background: transparent;
-        }
+ .hero .btn-get-started1:hover {
+     border: 2px solid var(--default-color);
+     color: var(--default-color);
+     background: transparent;
+ }
 
 @media (max-width: 768px) {
     .hero h2 {
@@ -1221,10 +1222,11 @@ section,
     color: var(--default-color);
 }
 
-    #courseSection .btn-get-started:hover {
-        background: var(--accent-color);
-        border: 2px solid var(--accent-color);
-    }
+#courseSection .btn-get-started:hover {
+    background: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    color:white;
+}
 
 #courseSection .btn-get-started1 {
     font-weight: 500;
@@ -1240,22 +1242,23 @@ section,
     color: white;
 }
 
-    #courseSection .btn-get-started1:hover {
-        border: 2px solid var(--default-color);
-        color: var(--default-color);
-        background: transparent;
-    }
-
-@media (max-width: 768px) {
-    .hero h2 {
-        font-size: 32px;
-    }
-
-    .hero p {
-        font-size: 18px;
-    }
+#courseSection .btn-get-started1:hover {
+    border: 2px solid var(--default-color);
+    color: var(--default-color);
+    background: transparent;
 }
-
+#courseSection .rightDiv {
+    margin-top: 60px;
+}
+#courseSection .rightDiv h5 {
+    font-weight: bold;
+}
+#courseSection .rightDiv i {
+    font-weight: bold;
+    color: #68A4C4;
+    font-size: 30px;
+    
+}
 /*--------------------------------------------------------------
 # Courses details
 --------------------------------------------------------------*/
@@ -1339,6 +1342,48 @@ section,
 --------------------------------------------------------------*/
 
 
+
+/*--------------------------------------------------------------
+# why section
+--------------------------------------------------------------*/
+.why-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.why-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.why-title span {
+    color: #333;
+}
+
+.feature-box {
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+ .feature-box:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon img {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-text {
+    font-size: 0.95rem;
+    color: #555;
+}
 
 /*--------------------------------------------------------------
 # Trainers Index Section
