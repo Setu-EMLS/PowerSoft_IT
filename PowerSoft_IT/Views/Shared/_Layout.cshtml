@@ -20,7 +20,71 @@
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <script src="~/js/site.js"></script>
     <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet" />
+  <style>
+    .social-links-container {
+        display: flex;
+        flex-direction: column;
+        position: fixed;      /* Fixed position */
+        left: 0;              /* Stick to left side */
+        bottom: 20px;         /* 60px from bottom */
+        z-index: 9999;        /* Stay on top */
+        overflow: hidden;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        text-decoration: none;
+        color: white;
+        padding: 8px 8px;
+        margin: 0;
+        transition: all 0.3s ease;
+        position: relative;
+        width: 45px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .social-link i {
+        font-size: 18px;
+        margin-left: 0;
+        transition: margin-left 0.3s ease;
+    }
+
+    .social-text {
+        position: absolute;
+        right: 60px;
+        opacity: 0;
+        transition: right 0.3s ease, opacity 0.3s ease;
+        font-weight: bold;
+    }
+
+    .social-link:hover {
+        width: 220px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-link:hover .social-text {
+        right: 80px;
+        opacity: 1;
+        color:white;
+    }
+
+    .social-link:hover i {
+        margin-left: 15px;
+        color:white;
+    }
+
+    .social-link.facebook { background-color: #3b5998; }
+    .social-link.twitter { background-color: #00acee; }
+    .social-link.instagram { background-color: #E1306C; }
+    .social-link.linkedin { background-color: #0e76a8; }
+    .social-link.youtube { background-color: #FF0000; }
+  </style>
+
 </head>
 <body class="index-page">
 
@@ -59,7 +123,28 @@
         </div>
     </header>
     <!--fixed Social media link -->
-
+    <div class="social-links-container">
+        <a href="#" class="social-link facebook">
+            <span class="social-text">Facebook</span>
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="social-link twitter">
+            <span class="social-text">Twitter</span>
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="social-link instagram">
+            <span class="social-text">Instagram</span>
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="social-link linkedin">
+            <span class="social-text">LinkedIn</span>
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" class="social-link youtube">
+            <span class="social-text">YouTube</span>
+            <i class="fab fa-youtube"></i>
+        </a>
+    </div>
 
     <div>
         @RenderBody()
@@ -131,8 +216,15 @@
         </div>
 
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- GLightbox CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- GLightbox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Jquery CDN link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Custom Js link -->
@@ -152,9 +244,9 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
