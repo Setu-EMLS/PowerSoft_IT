@@ -1,73 +1,107 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-  <style>
-    .social-links-container {
-        display: flex;
-        flex-direction: column;
-        position: fixed;      /* Fixed position */
-        left: 0;              /* Stick to left side */
-        bottom: 20px;         /* 60px from bottom */
-        z-index: 9999;        /* Stay on top */
-        overflow: hidden;
-    }
-
-    .social-link {
-        display: flex;
-        align-items: center;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        text-decoration: none;
-        color: white;
-        padding: 8px 8px;
-        margin: 0;
-        transition: all 0.3s ease;
-        position: relative;
-        width: 45px;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
-    .social-link i {
-        font-size: 18px;
-        margin-left: 0;
-        transition: margin-left 0.3s ease;
-    }
-
-    .social-text {
-        position: absolute;
-        right: 60px;
-        opacity: 0;
-        transition: right 0.3s ease, opacity 0.3s ease;
-        font-weight: bold;
-    }
-
-    .social-link:hover {
-        width: 220px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .social-link:hover .social-text {
-        right: 80px;
-        opacity: 1;
-        color:white;
-    }
-
-    .social-link:hover i {
-        margin-left: 15px;
-        color:white;
-    }
-
-    .social-link.facebook { background-color: #3b5998; }
-    .social-link.twitter { background-color: #00acee; }
-    .social-link.instagram { background-color: #E1306C; }
-    .social-link.linkedin { background-color: #0e76a8; }
-    .social-link.youtube { background-color: #FF0000; }
-  </style>
+    
 <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <div class="banner">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true" data-bs-pause="false">
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <img src="~/images/background/H-slide-01.jpg" class="d-block w-100" alt="Slide 1">
+                    <div class="carousel-caption custom-caption">
+                        <h5>Learning Today,<br>Leading Tomorrow</h5>
+                        <p>With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules..</p>
+                        <a href="/courses" >Browse Courses</a>
+                        <a href="/courses">Join Free Seminar</a>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img src="~/images/background/H-slide-02.jpg" class="d-block w-100" alt="Slide 2">
+                    <div class="carousel-caption custom-caption">
+                        <h5>Learning Today,<br>Leading Tomorrow</h5>
+                        <p>With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules.</p>
+                        <a href="#" class="btn-viewDetails">Discover</a>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img src="~/images/background/H-slide-03.jpg" class="d-block w-100" alt="Slide 3">
+                    <div class="carousel-caption custom-caption">
+                        <h5>Learning Today,<br>Leading Tomorrow</h5>
+                        <p>With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules..</p>
+                        <a href="#" class="btn-viewDetails">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                @* <span class="carousel-control-prev-icon" aria-hidden="true"></span> *@
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                @* <span class="carousel-control-next-icon" aria-hidden="true"></span> *@
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+@*Dynamic         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true" data-bs-pause="false">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                @for (int i = 0; i < Model.HomeHeros.Count; i++)
+                {
+                    <button type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide-to="@i"
+                            class="@(i == 0 ? "active" : "")"
+                            aria-current="@(i == 0 ? "true" : "false")"
+                            aria-label="Slide @(i + 1)">
+                    </button>
+                }
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.HomeHeros.Count; i++)
+                {
+                    var item = Model.HomeHeros[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")" data-bs-interval="3000">
+                        <img src="@item.PicPath" class="d-block w-100" alt="...">
+                        <div class="carousel-caption custom-caption">
+                            <h5>@item.Title</h5>
+                            <p>@item.Description</p>
+                            <a href="@item.Link" class="btn-viewDetails">@item.Button</a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+ *@    </div>
+    
+    @* <section id="hero" class="hero section dark-background">
         <img src="~/images/background/10235254.jpg" alt="" data-aos="fade-in" style="height:90vh;">
         <div class="container">
             <h2 data-aos="fade-up" data-aos-delay="100">Learning Today,<br>Leading Tomorrow</h2>
@@ -78,7 +112,7 @@
                 <a href="courses.html" class="btn-get-started ml-3">Join Free Seminar</a>
             </div>
         </div>
-    </section><!-- Hero Section -->
+    </section> *@<!-- Hero Section -->
     
     <!-- About Section -->
     <section id="about" class="about section">

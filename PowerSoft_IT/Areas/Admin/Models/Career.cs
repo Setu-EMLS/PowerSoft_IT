@@ -3,26 +3,18 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace PowerSoft_IT.Areas.Admin.Models
 {
-    public class Hero
-    {
-    }
-	public class HomeHero
+	public class Career
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
-		public string Description { get; set; }
-		public string Button { get; set; }
-		public string Link { get; set; }
-		[ValidateNever]
-		public string PicPath { get; set; }
-		[NotMapped]
-		public IFormFile Picture { get; set; }
+		public string? Description { get; set; }
 	}
-	public class AboutUsHero
+
+	public class CareerHero
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
-		public string Description { get; set; }
+		public string? Description { get; set; }
 		[ValidateNever]
 		public string PicPath { get; set; }
 		[NotMapped]
