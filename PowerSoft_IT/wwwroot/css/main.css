@@ -55,13 +55,12 @@ body {
 
 a {
     color: var(--accent-color);
-    text-decoration: none;
+    text-decoration: none !important;
     transition: 0.3s;
 }
 
 a:hover {
     color: var(--secondary-color);
-    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -202,7 +201,9 @@ h1, h2, h3, h4, h5, h6 {
         opacity: 0;
     }
 }
-
+.fa-xmark {
+    font-size: 26px;
+}
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -601,14 +602,14 @@ section,
     position: relative;
 }
 
-    .section-title h2::after {
-        content: "";
-        width: 120px;
-        height: 1px;
-        display: inline-block;
-        background: var(--accent-color);
-        margin: 4px 10px;
-    }
+.section-title h2::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    background: var(--accent-color);
+    margin: 4px 10px;
+}
 
 .section-title p {
     color: var(--heading-color);
@@ -624,7 +625,7 @@ section,
 --------------------------------------------------------------*/
 .banner .custom-caption {
     position: absolute;
-    top: 15%;
+    top: 18%;
     text-align: center;
     color: #fff;
 }
@@ -632,6 +633,7 @@ section,
     color: var(--accent-color);
     font-size: 40px;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .banner .custom-caption p {
@@ -853,30 +855,28 @@ section,
 /*--------------------------------------------------------------
 # Counts Section
 --------------------------------------------------------------*/
-.counts {
-    padding: 25px 0;
+.stats-item {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
 }
-
-.counts .stats-item {
-    padding: 30px;
-    width: 100%;
+.stats-item:hover {
+    transform: translateY(-5px);
 }
-
-.counts .stats-item span {
+.stats-item span {
     font-size: 48px;
-    display: block;
-    color: var(--accent-color);
     font-weight: 700;
+    color: var(--accent-color, #009cea);
+}
+.stats-item p {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
 }
 
-.counts .stats-item p {
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
-    padding: 0;
-    margin: 0;
-    font-family: var(--heading-font);
-    font-size: 15px;
-    font-weight: 600;
-}
 
 /*--------------------------------------------------------------
 # Why Us Section
@@ -1405,8 +1405,7 @@ body.dark-mode .payment-section .s#f38854ection-title {
 
 .payment-options-grid {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px; /* Space between cards */
+    gap: 30px;
     justify-content: center;
     align-items: flex-start;
 }
@@ -1418,11 +1417,10 @@ body.dark-mode .payment-section .s#f38854ection-title {
     padding: 30px;
     text-align: center;
     transition: all 0.3s ease;
-    flex: 1;
-    min-width: 600px;
-    max-width: 45%;
+    min-width: 500px;
     position: relative;
     overflow: hidden;
+    min-height: 300px;
 }
 
 body.dark-mode .payment-card {

@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-    
 <main class="main">
 
     <!-- Hero Section -->
@@ -23,7 +22,7 @@
                         <h5>Learning Today,<br>Leading Tomorrow</h5>
                         <p>With the vision of Smart Bangladesh Powersoft IT is ready to enhance it's manpower skill. Let make yourself an asset with our experienced mentors and updated course modules..</p>
                         <a href="/courses" >Browse Courses</a>
-                        <a href="/courses">Join Free Seminar</a>
+                        <a onclick="freeSeminar();">Join Free Seminar</a>
                     </div>
                 </div>
 
@@ -109,7 +108,7 @@
             <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
 
                 <a href="courses.html" class="btn-get-started1" style="margin-right:10px;">Browse Courses</a>
-                <a href="courses.html" class="btn-get-started ml-3">Join Free Seminar</a>
+                <a sclass="btn-get-started ml-3" onclick="freeSeminar();>Join Free Seminar</a>
             </div>
         </div>
     </section> *@<!-- Hero Section -->
@@ -135,7 +134,7 @@
                         <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
                         <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
                     </ul>
-                    <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                    <a href="/aboutUs" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
                 </div>
 
             </div>
@@ -145,44 +144,41 @@
     </section><!-- /About Section -->
     <!-- Counts Section -->
     <section id="counts" class="section counts light-background">
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
+        <div class="container">
             <div class="row gy-4">
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+                    <div class="stats-item text-center">
+                        <span class="custom-counter" data-target="1232">0</span>
                         <p>Students</p>
                     </div>
-                </div><!-- End Stats Item -->
+                </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+                    <div class="stats-item text-center">
+                        <span class="custom-counter" data-target="64">0</span>
                         <p>Courses</p>
                     </div>
-                </div><!-- End Stats Item -->
+                </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+                    <div class="stats-item text-center">
+                        <span class="custom-counter" data-target="42">0</span>
                         <p>Events</p>
                     </div>
-                </div><!-- End Stats Item -->
+                </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="stats-item text-center w-100 h-100">
-                        <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
+                    <div class="stats-item text-center">
+                        <span class="custom-counter" data-target="24">0</span>
                         <p>Trainers</p>
                     </div>
-                </div><!-- End Stats Item -->
+                </div>
 
             </div>
-
         </div>
+    </section>
 
-    </section><!-- /Counts Section -->
     <!-- Why Us Section -->
     <section id="why-us" class="section why-us">
 
@@ -372,7 +368,8 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="course-item shadow">
+                    <a href="Courses/Details">
+                        <div class="course-item shadow">
                         <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
                         <div class="course-content">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -380,7 +377,7 @@
                                 <p class="price">$169</p>
                             </div>
 
-                            <h3><a href="course-details.html">Website Design</a></h3>
+                            <h3><a href="Courses/Details">Website Design</a></h3>
                             <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                             <div class="trainer d-flex justify-content-between align-items-center">
                                 <div class="trainer-profile d-flex align-items-center">
@@ -395,10 +392,12 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div> <!-- End Course Item-->
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="course-item shadow">
+                    <a href="Courses/Details">
+                        <div class="course-item shadow">
                         <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
                         <div class="course-content">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -406,7 +405,7 @@
                                 <p class="price">$250</p>
                             </div>
 
-                            <h3><a href="course-details.html">Search Engine Optimization</a></h3>
+                            <h3><a href="Courses/Details">Search Engine Optimization</a></h3>
                             <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                             <div class="trainer d-flex justify-content-between align-items-center">
                                 <div class="trainer-profile d-flex align-items-center">
@@ -421,10 +420,12 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div> <!-- End Course Item-->
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="course-item shadow">
+                    <a href="Courses/Details">
+                        <div class="course-item shadow">
                         <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
                         <div class="course-content">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -432,7 +433,7 @@
                                 <p class="price">$180</p>
                             </div>
 
-                            <h3><a href="course-details.html">Copywriting</a></h3>
+                            <h3>Copywriting</h3>
                             <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                             <div class="trainer d-flex justify-content-between align-items-center">
                                 <div class="trainer-profile d-flex align-items-center">
@@ -446,7 +447,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    </a>
                 </div> <!-- End Course Item-->
 
             </div>
@@ -489,14 +491,69 @@
                                 </p>
                             </div>
                         </div>
-                        <button class="btn-get-started">Browse  Courses</button>
-                        <button class="btn-get-started1">Join free Seminar</button>
+                        <a href="/courses" class="btn-get-started text-center">Browse  Courses</a>
+                        <button  onclick="freeSeminar();" class="btn-get-started1">Join free Seminar</button>
                         
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Free Seminar Modal -->
+    <div class="modal fade" id="freeSeminar" tabindex="-1" aria-labelledby="freeSeminarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class="fa-solid fa-xmark float-end" data-bs-dismiss="modal"></i>
+                    <h2 id="modalTitle" class="text-center">Join Free Seminar</h2>
+                    <p id="modalDescription" class="text-center">Fill out the form below to reserve your seat.</p>
+					<hr />
+					<div class="container">
+                        <form id="seminarForm">
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <label for="course">Course</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-book"></i></span>
+                                        <input type="text" id="course" name="course" class="form-control" placeholder="Course Name" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-2">
+                                    <label for="name">Name</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-2">
+                                    <label for="email">Email</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-2">
+                                    <label for="contact">Contact</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                                        <input type="text" id="contact" name="contact" class="form-control" placeholder="Phone Number" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-end">
+                    <button type="submit" form="seminarForm" class="btn btn-success">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Trainers Index Section -->
@@ -637,7 +694,7 @@
         </div>
     </section>
     <!-- Bank Section -->
-    <section id="payment-section" class="payment-section">
+    <section id="payment-section" class="payment-sectionpayment-section">
         <div class="container">
             <h1 class="text-center section-title" data-lang-key="acceptPaymentTitle">Accept Payment</h1>
             <div class="payment-options-grid">
@@ -677,3 +734,31 @@
         </div>
     </section>
 </main>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function freeSeminar() {
+        const modal = new bootstrap.Modal(document.getElementById('freeSeminar'));
+        modal.show();
+    }
+
+    function animateCounter(el, target) {
+      let current = 0;
+      const stepTime = 1; // 1ms per step = fast; increase for slower
+      const interval = setInterval(() => {
+        el.textContent = current;
+        if (current >= target) {
+          clearInterval(interval);
+        }
+        current++;
+      }, stepTime);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const counters = document.querySelectorAll('.custom-counter');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        animateCounter(counter, target);
+      });
+    });
+</script>
