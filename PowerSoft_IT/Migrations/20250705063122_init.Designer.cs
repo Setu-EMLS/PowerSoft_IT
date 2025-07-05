@@ -11,7 +11,7 @@ using PowerSoft_IT.Models;
 namespace PowerSoft_IT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250519154337_init")]
+    [Migration("20250705063122_init")]
     partial class init
     {
         /// <inheritdoc />

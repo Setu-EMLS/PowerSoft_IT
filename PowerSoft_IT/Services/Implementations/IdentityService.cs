@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using PowerSoft_IT.Models;
 using PowerSoft_IT.Services.Interfaces;
-using System.Security.Claims;
 
 namespace PowerSoft_IT.Services.Implementations
 {
@@ -17,16 +18,20 @@ namespace PowerSoft_IT.Services.Implementations
 		public async Task signInUser(User user)
 		{
 			var claims = new List<Claim>
-					{
-						new Claim(ClaimTypes.Name, user.Email),
-						new Claim(ClaimTypes.Role, user.RoleId == 1 ? "Admin" : "User")
-					};
+	{
+		new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+		new Claim(ClaimTypes.Name, user.FullName),
+		new Claim(ClaimTypes.Email, user.Email),
+		new Claim(ClaimTypes.Role, user.RoleId.ToString()), // Optional
+		new Claim("RoleName", user.RoleId == 1 ? "Admin" :
+							 user.RoleId == 2 ? "Teacher" : "Student")
+	};
 
-			var claimsIdentity = new ClaimsIdentity(claims, "Custom");
-			var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+			var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+			var principal = new ClaimsPrincipal(identity);
 
-			// Sign in the user
-			await _httpContextAccessor.HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
+			await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 		}
+
 	}
 }
