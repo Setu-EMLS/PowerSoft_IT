@@ -1,6 +1,6 @@
 ﻿@model PowerSoft_IT.Models.User
 <div id="login">
-	<form id="loginFrm" method="post" class="show" asp-action="SignUp" asp-controller="Home" enctype="multipart/form-data">
+	<form id="RegisterFrm" method="post" class="show" asp-action="SignUp" asp-controller="Home" enctype="multipart/form-data">
 		<div>
 			<a href="/" class="backToHome shadow"><i class="fa-solid fa-arrow-left"></i></a>
 			<h1>Register</h1>
@@ -19,10 +19,15 @@
 			<div class="input-group mb-3">
 				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key text-primary"></i></span>
 				<input type="password" id="Password" name="Password" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-eye-slash closeEye"></i><i class="fa-solid fa-eye openEye"></i></span>
+				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-eye-slash closeEye closeEye1"></i><i class="fa-solid fa-eye openEye openEye1"></i></span>
 			</div>
-			<input type="submit" value="Register" class="btn btn-outline-primary rounded-5 btn-light registerBtn">
 
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key text-primary"></i></span>
+				<input type="password" id="ConfirmPassword" name="ConfirmPassword" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-eye-slash closeEye closeEye2"></i><i class="fa-solid fa-eye openEye openEye2"></i></span>
+			</div>
+			<input type="submit" value="Register" class="btn btn-outline-primary rounded-5 btn-light registerBtn"><br />
 			<input type="checkbox" />Remember me<br />
 			<a href="/login">I have a account</a>
 		</div>
@@ -39,10 +44,17 @@
 		$(".openEye").show();
 	});
 
-	$(".openEye").click(() => {
+	$(".openEye1").click(() => {
 		$("#Password").attr('type', 'password');
-		$(".closeEye").show();
-		$(".openEye").hide();
+		$(".closeEye1").show();
+		$(".openEye1").hide();
 	});
+
+	$(".openEye2").click(() => {
+		$("#ConfirmPassword").attr('type', 'password');
+		$(".closeEye2").show();
+		$(".openEye2").hide();
+	});
+
 	$(".social-links-container").hide();
 </script>

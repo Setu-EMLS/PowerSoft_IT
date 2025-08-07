@@ -42,47 +42,47 @@ namespace PowerSoft_IT.Controllers
 
 		[HttpPost]
 		public async Task<IActionResult> Login(Login model)
-{
-    if (ModelState.IsValid)
-    {
-        var user = _userService.GetUserByEmail(model.Email);
-        if (user != null)
-        {
-            if (_userService.VerifyPassword(model.Password, user.Password, user.Salt))
-            {
-                await _identityService.signInUser(user);
+		{
+		    if (ModelState.IsValid)
+		    {
+		        var user = _userService.GetUserByEmail(model.Email);
+		        if (user != null)
+		        {
+		            if (_userService.VerifyPassword(model.Password, user.Password, user.Salt))
+		            {
+		                await _identityService.signInUser(user);
+		
+		                CookieOptions option = new CookieOptions
+		                {
+		                    Expires = DateTime.Now.AddDays(1),
+		                    HttpOnly = true,
+		                    Secure = true, 
+		                    SameSite = SameSiteMode.Lax
+		                };
+		
+		                Response.Cookies.Append("UserEmail", user.Email, option);
+		                Response.Cookies.Append("UserRole", user.RoleId.ToString(), option);
+		
+		                // Redirect based on role
+		                if (user.RoleId == 1) return RedirectToAction("Index", "Home", new { Area = "Admin" });
+		                else if (user.RoleId == 2) return RedirectToAction("Index", "Home", new { Area = "Teacher" });
+		                else if (user.RoleId == 3) return RedirectToAction("Index", "Home", new { Area = "Student" });
+		
+		                return RedirectToAction("Index", "Home");
+		            }
+		            else
+		            {
+		                ModelState.AddModelError("Password", "Incorrect password. Please try again.");
+		            }
+		        }
+		        else
+		        {
+		            ModelState.AddModelError("Email", "User not found. Please check your email.");
+		        }
+		    }
 
-                CookieOptions option = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(1),
-                    HttpOnly = true,
-                    Secure = true, 
-                    SameSite = SameSiteMode.Lax
-                };
-
-                Response.Cookies.Append("UserEmail", user.Email, option);
-                Response.Cookies.Append("UserRole", user.RoleId.ToString(), option);
-
-                // Redirect based on role
-                if (user.RoleId == 1) return RedirectToAction("Index", "Home", new { Area = "Admin" });
-                else if (user.RoleId == 2) return RedirectToAction("Index", "Home", new { Area = "Teacher" });
-                else if (user.RoleId == 3) return RedirectToAction("Index", "Home", new { Area = "Student" });
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("Password", "Incorrect password. Please try again.");
-            }
-        }
-        else
-        {
-            ModelState.AddModelError("Email", "User not found. Please check your email.");
-        }
-    }
-
-    return View(model);
-}
+		    return View(model);
+		}
 
 
 		//============================== Register ==============================//
@@ -137,7 +137,7 @@ namespace PowerSoft_IT.Controllers
 		public async Task<IActionResult> Logout()
 		{
 			await HttpContext.SignOutAsync(); // Signs out the user
-			return RedirectToAction("Login", "Home");
+			return RedirectToAction("Index", "Login");
 		}
 
 		//========================== Change Password =====================//

@@ -61,3 +61,23 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
+
+.profile-card {
+    background: #fff;
+    padding: 25px;
+    width: 260px;
+}
+
+.fa-user {
+    color: var(--secondary-color);
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 30px;
+    border: 1px solid var(--secondary-color);
+}
+
+.fa-envelope {
+    color: var(--secondary-color);
+    font-weight: bold;
+    padding: 3px;
+}

@@ -28,7 +28,7 @@ namespace LifeCareNGO_WebSite.Areas.Admin.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(); // Signs out the user
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

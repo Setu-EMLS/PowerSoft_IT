@@ -7,6 +7,10 @@ namespace PowerSoft_IT.Areas.Teacher.Controllers
     {
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                RedirectToAction("Index", "Login", new { area = "" });
+            }
             return View();
         }
     }
