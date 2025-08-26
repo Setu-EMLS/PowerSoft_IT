@@ -81,3 +81,20 @@ body {
     font-weight: bold;
     padding: 3px;
 }
+
+/*Common Class*/
+.addBtn {
+    background: var(--promary-color) !important;
+    color: white !important;
+    font-weight: bold;
+    border:none;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    padding: 7px 30px !important;
+}
+/*.commonTable {
+    background: green;
+}*/
+.dataTables_wrapper .dt-buttons {
+    margin-bottom: 10px;
+}

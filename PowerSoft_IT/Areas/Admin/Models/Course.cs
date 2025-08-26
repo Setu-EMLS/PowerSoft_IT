@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using PowerSoft_IT.Areas.Student.Models;
+using PowerSoft_IT.Areas.Teacher.Models;
 namespace PowerSoft_IT.Areas.Admin.Models
 {
 	public class Coursecategory
@@ -26,6 +27,8 @@ namespace PowerSoft_IT.Areas.Admin.Models
 		[ForeignKey("Coursecategory")]
 		public int CategoryId { get; set; }
 		public Coursecategory Coursecategory { get; set; }
+		public List<Areas.Teacher.Models.Teacher> Teachers { get; set; } = new List<Areas.Teacher.Models.Teacher> ();
+		public List<Areas.Student.Models.Student> Students { get; set; } = new List<Student.Models.Student>();
 
 	}
 }

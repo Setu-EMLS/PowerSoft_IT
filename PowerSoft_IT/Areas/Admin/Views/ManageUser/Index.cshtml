@@ -1,0 +1,116 @@
+﻿<main class="col-md-10 px-4 admin">
+    <div class="header mt-4 bt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h3>Manage User</h3>
+            </div>
+        </div>
+    </div><br /><br />
+
+    <table id="myTable" class="display table table-striped">
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>Patient Name</th>
+                <th>Age</th>
+                <th>Doctor</th>
+                <th>Appointment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Rahim</td>
+                <td>28</td>
+                <td>Dr. Karim</td>
+                <td>2025-08-26</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Karim</td>
+                <td>34</td>
+                <td>Dr. Hossain</td>
+                <td>2025-08-28</td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <div class="mb-3">
+                        <label class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" id="patientName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Doctor</label>
+                        <input type="text" class="form-control" id="doctor" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Appointment Date</label>
+                        <input type="date" class="form-control" id="appointmentDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" />
+
+<!-- DataTables Buttons CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable({
+            destroy: true,
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            responsive: true,
+            dom: 'Bfrtip',   // <-- must include B for Buttons
+            buttons: [
+                {
+                    text: '+ Add User',
+                    className: 'addBtn',
+                    action: function () {
+                        $('#addUserModal').modal('show');
+                    }
+                }
+            ]
+        });
+    });
+
+
+</script>
