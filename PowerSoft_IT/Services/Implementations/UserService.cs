@@ -26,6 +26,7 @@ namespace PowerSoft_IT.Services.Implementations
             var hashedPassword = CreatePasswordHash(enteredPassword, salt);
             return hashedPassword == storedPassword;
         }
+
         public string CreateSaltKey(int size)
         {
             // Generate a cryptographic random number
@@ -72,7 +73,5 @@ namespace PowerSoft_IT.Services.Implementations
 
             return true;
         }
-
-
     }
 }

@@ -23,7 +23,7 @@ namespace PowerSoft_IT.Areas.Admin.Controllers
 		public IActionResult GetRole()
 		{
 
-			var roles = _context.tbl_roles.ToList();
+			//var roles = _context.tbl_roles.ToList();
 			return View();
 		}
 

@@ -108,7 +108,10 @@ namespace PowerSoft_IT.Controllers
 						user.Password = _userService.CreatePasswordHash(model.Password, user.Salt);
 						if (user.Password != null)
 						{
-							user.RoleId = 3;
+							if(user.RoleId == null)
+							{
+								user.RoleId = 3;
+							}
 							user.TenantId = 0;
 							_context.Tbl_Users.Add(user);
 							_context.SaveChanges();
