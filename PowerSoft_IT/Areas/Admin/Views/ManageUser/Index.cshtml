@@ -108,7 +108,23 @@
                         $('#addUserModal').modal('show');
                     }
                 }
-            ]
+            ],
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            responsive: true,
+            initComplete: function(settings, json) {
+                $('#myTable thead th ').css({
+                    'background-color': '#4B92CD',
+                    'color': 'white',
+                    'text-align': 'center'
+                });
+
+                $('#myTable  td ').css({
+                    'text-align': 'center'
+                });
+            }
         });
     });
 

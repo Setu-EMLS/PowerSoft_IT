@@ -20,7 +20,8 @@ namespace PowerSoft_IT.Models
         public DbSet<SMLinks> SMLinks { get; set; }
         //public DbSet<AboutUs> AboutUs { get; set; }
         //public DbSet<Career> Careers { get; set; }
-        //public DbSet<Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseCategory> CourseCategorys { get; set; }
         //public DbSet<FAQ> FAQs { get; set; }
         //public DbSet<Hero> Heroes { get; set; }
         //public DbSet<Home> Homes { get; set; }

@@ -4,7 +4,7 @@ using PowerSoft_IT.Areas.Student.Models;
 using PowerSoft_IT.Areas.Teacher.Models;
 namespace PowerSoft_IT.Areas.Admin.Models
 {
-	public class Coursecategory
+	public class CourseCategory
 	{
 		public int Id { get; set; }
 
@@ -17,6 +17,7 @@ namespace PowerSoft_IT.Areas.Admin.Models
 
 		public List<Course> Courses { get; set; } = new List<Course>();
 	}
+
 	public class Course
 	{
 		public int Id { get; set; }
@@ -26,7 +27,7 @@ namespace PowerSoft_IT.Areas.Admin.Models
 		public decimal Price { get; set; }
 		[ForeignKey("Coursecategory")]
 		public int CategoryId { get; set; }
-		public Coursecategory Coursecategory { get; set; }
+		public CourseCategory Coursecategory { get; set; }
 		public List<Areas.Teacher.Models.Teacher> Teachers { get; set; } = new List<Areas.Teacher.Models.Teacher> ();
 		public List<Areas.Student.Models.Student> Students { get; set; } = new List<Student.Models.Student>();
 
