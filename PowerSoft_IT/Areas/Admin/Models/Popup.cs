@@ -5,9 +5,11 @@ namespace PowerSoft_IT.Areas.Admin.Models
 {
 	public class Popup
 	{
-
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public List<SitePopup> sitePopups { get; set; }= new List<SitePopup>();
 	}
-	public class HomePopup
+	public class SitePopup
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
@@ -17,5 +19,8 @@ namespace PowerSoft_IT.Areas.Admin.Models
 		public string PicPath { get; set; }
 		[NotMapped]
 		public IFormFile Picture { get; set; }
+		[ForeignKey("Popup")]
+		public int PopupId { get; set; }
+		public Popup Popup { get; set; }
 	}
 }

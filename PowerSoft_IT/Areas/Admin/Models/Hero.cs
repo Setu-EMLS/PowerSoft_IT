@@ -5,7 +5,10 @@ namespace PowerSoft_IT.Areas.Admin.Models
 {
     public class Hero
     {
-    }
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+	}
 	public class HomeHero
 	{
 		public int Id { get; set; }

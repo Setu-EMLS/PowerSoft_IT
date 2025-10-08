@@ -3,6 +3,7 @@
 
     public class Product
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Version { get; set; }
         public string Price { get; set; }
@@ -13,7 +14,8 @@
     }
     public class RelatedProductViewModel
     {
-        public string Title { get; set; }
+		public int Id { get; set; }
+		public string Title { get; set; }
         public string Version { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }

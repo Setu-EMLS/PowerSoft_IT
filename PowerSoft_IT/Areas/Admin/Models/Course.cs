@@ -21,15 +21,36 @@ namespace PowerSoft_IT.Areas.Admin.Models
 	public class Course
 	{
 		public int Id { get; set; }
-		[Required(ErrorMessage ="Product Title is requide")]
+		[Required(ErrorMessage = "Product Title is requide")]
 		public string Title { get; set; }
 		public string? Description { get; set; }
-		public decimal Price { get; set; }
+		public decimal? Price { get; set; }
 		[ForeignKey("Coursecategory")]
 		public int CategoryId { get; set; }
 		public CourseCategory Coursecategory { get; set; }
-		public List<Areas.Teacher.Models.Teacher> Teachers { get; set; } = new List<Areas.Teacher.Models.Teacher> ();
+		public List<Areas.Teacher.Models.Teacher> Teachers { get; set; } = new List<Areas.Teacher.Models.Teacher>();
 		public List<Areas.Student.Models.Student> Students { get; set; } = new List<Student.Models.Student>();
 
+	}
+	public class BoosterCategories{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string? Description { get; set; }
+		public decimal Icon { get; set; }
+	}
+
+	public class FreeSeminar
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string? Description { get; set; }
+		public decimal Icon { get; set; }
+	}
+	public class FreeSeminarBanner
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string? PicPath { get; set; }
+		public IFormFile Picture { get; set; }
 	}
 }
