@@ -1,0 +1,9 @@
+@model List<Announcement>
+@{
+    ViewData["Title"] = "Announcements";
+}
+<div class="row justify-content-center">
+    <div class="col-xl-8">
+        <partial name="_AnnouncementList" model="Model" />
+    </div>
+</div>

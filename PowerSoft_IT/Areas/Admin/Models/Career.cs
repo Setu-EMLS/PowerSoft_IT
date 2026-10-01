@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace PowerSoft_IT.Areas.Admin.Models
+namespace EduLearn.Areas.Admin.Models
 {
 	public class Career
 	{

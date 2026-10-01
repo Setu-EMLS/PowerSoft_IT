@@ -1,18 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PowerSoft_IT.Models;
-using PowerSoft_IT.Services.Implementations;
-using PowerSoft_IT.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using EduLearn.Infrastructure;
+using EduLearn.Models;
+using EduLearn.Services.Implementations;
+using EduLearn.Services.Interfaces;
 
-namespace PowerSoft_IT
+namespace EduLearn
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -21,19 +25,26 @@ namespace PowerSoft_IT
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IIdentityService, IdentityService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<ILearningService, LearningService>();
+            builder.Services.AddScoped<IFileService, FileService>();
 
             builder.Services.AddAuthentication("MyCookieAuth")
                 .AddCookie("MyCookieAuth", options =>
                 {
-                    options.LoginPath = "/Home/Login";
+                    options.LoginPath = "/Login";
                     options.LogoutPath = "/Home/Logout";
+                    options.AccessDeniedPath = "/Home/AccessDenied";
+                    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                    options.SlidingExpiration = true;
                     options.Cookie.HttpOnly = true;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            await DbSeeder.SeedAsync(app.Services, app.Configuration, app.Logger);
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -41,15 +52,13 @@ namespace PowerSoft_IT
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles(); // ✅ Serve static files
-
+            app.UseStaticFiles(); 
             app.UseRouting();
 
-            app.UseAuthentication(); // ✅ Authentication middleware
+            app.UseAuthentication(); 
             app.UseAuthorization();
 
-            // Optional static assets extensions, if they exist
-            app.MapStaticAssets(); // make sure this method exists
+            app.MapStaticAssets(); 
             app.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
@@ -58,7 +67,7 @@ namespace PowerSoft_IT
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}"
-            ).WithStaticAssets(); // make sure this extension is defined
+            ).WithStaticAssets(); 
 
             app.Run();
         }

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PowerSoft_IT.Models;
+using EduLearn.Models;
 
 #nullable disable
 
-namespace PowerSoft_IT.Migrations
+namespace EduLearn.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20251008103017_init")]
@@ -124,7 +124,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("HeaderNavChilds");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.AboutUs", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.AboutUs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("AboutUs");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.AboutUsHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.AboutUsHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,7 +181,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("AboutUsHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.BoosterCategories", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.BoosterCategories", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("BoosterCategories");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Career", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Career", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -224,7 +224,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Careers");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.ContactHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.ContactHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -248,7 +248,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("ContactHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Counter", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Counter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -272,7 +272,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Counters");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Course", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -300,7 +300,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.CourseCategory", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.CourseCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -322,7 +322,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("CourseCategorys");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.FAQ", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.FAQ", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -342,7 +342,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("FAQs");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.FeedbackHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.FeedbackHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -367,7 +367,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("FeedbackHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.GetwayInfo", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.GetwayInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -398,7 +398,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("GetwayInfo");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Home", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Home", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,7 +414,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Homes");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.HomeHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.HomeHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -447,7 +447,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("HomeHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Mission", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Mission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -471,7 +471,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Missions");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Payment", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -491,7 +491,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.PaymentGetway", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.PaymentGetway", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -511,7 +511,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("PaymentGetways");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Popup", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Popup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -528,7 +528,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Popups");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.ProductHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.ProductHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -553,7 +553,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("ProductHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Seminar", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Seminar", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -583,7 +583,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Seminars");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.SeminarCategory", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.SeminarCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -603,7 +603,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("SeminarCategorys");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Service", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -627,7 +627,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.ServiceHero", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.ServiceHero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -652,7 +652,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("ServiceHero");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.SitePopup", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.SitePopup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -686,7 +686,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("SitePopups");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Slider", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -706,7 +706,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Sliders");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.SliderBtn", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.SliderBtn", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -731,7 +731,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("SliderBtns");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Vision", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Vision", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -754,7 +754,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Visions");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.WhyChooseOurProduct", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.WhyChooseOurProduct", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -774,7 +774,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("WhyChooseOurProduct");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.WhyITBest", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.WhyITBest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -797,7 +797,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("WhyITBest");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Student.Models.Student", b =>
+            modelBuilder.Entity("EduLearn.Areas.Student.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -850,7 +850,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Student.Models.StudentFeedback", b =>
+            modelBuilder.Entity("EduLearn.Areas.Student.Models.StudentFeedback", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -875,7 +875,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("StudentFeedbacks");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Teacher.Models.Teacher", b =>
+            modelBuilder.Entity("EduLearn.Areas.Teacher.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -928,7 +928,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.Information", b =>
+            modelBuilder.Entity("EduLearn.Models.Information", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -959,7 +959,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Information");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.Product", b =>
+            modelBuilder.Entity("EduLearn.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -996,7 +996,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.RelatedProductViewModel", b =>
+            modelBuilder.Entity("EduLearn.Models.RelatedProductViewModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1038,7 +1038,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("RelatedProductViewModel");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.Roles", b =>
+            modelBuilder.Entity("EduLearn.Models.Roles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1054,7 +1054,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("tbl_roles");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.SMLinks", b =>
+            modelBuilder.Entity("EduLearn.Models.SMLinks", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -1078,7 +1078,7 @@ namespace PowerSoft_IT.Migrations
                     b.ToTable("SMLinks");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.User", b =>
+            modelBuilder.Entity("EduLearn.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -1136,9 +1136,9 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("HeaderNav");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Course", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Course", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.CourseCategory", "Coursecategory")
+                    b.HasOne("EduLearn.Areas.Admin.Models.CourseCategory", "Coursecategory")
                         .WithMany("Courses")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1147,18 +1147,18 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("Coursecategory");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.GetwayInfo", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.GetwayInfo", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.PaymentGetway", "Getway")
+                    b.HasOne("EduLearn.Areas.Admin.Models.PaymentGetway", "Getway")
                         .WithMany("GetwayInfo")
                         .HasForeignKey("GetwayId");
 
                     b.Navigation("Getway");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.SitePopup", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.SitePopup", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.Popup", "Popup")
+                    b.HasOne("EduLearn.Areas.Admin.Models.Popup", "Popup")
                         .WithMany("sitePopups")
                         .HasForeignKey("PopupId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1167,9 +1167,9 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("Popup");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.SliderBtn", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.SliderBtn", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.Slider", "Slider")
+                    b.HasOne("EduLearn.Areas.Admin.Models.Slider", "Slider")
                         .WithMany("SliderBtns")
                         .HasForeignKey("SliderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1178,9 +1178,9 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("Slider");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Student.Models.Student", b =>
+            modelBuilder.Entity("EduLearn.Areas.Student.Models.Student", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.Course", "Course")
+                    b.HasOne("EduLearn.Areas.Admin.Models.Course", "Course")
                         .WithMany("Students")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1189,9 +1189,9 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Teacher.Models.Teacher", b =>
+            modelBuilder.Entity("EduLearn.Areas.Teacher.Models.Teacher", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Areas.Admin.Models.Course", "Course")
+                    b.HasOne("EduLearn.Areas.Admin.Models.Course", "Course")
                         .WithMany("Teachers")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1200,16 +1200,16 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.RelatedProductViewModel", b =>
+            modelBuilder.Entity("EduLearn.Models.RelatedProductViewModel", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Models.Product", null)
+                    b.HasOne("EduLearn.Models.Product", null)
                         .WithMany("RelatedProducts")
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.SMLinks", b =>
+            modelBuilder.Entity("EduLearn.Models.SMLinks", b =>
                 {
-                    b.HasOne("PowerSoft_IT.Models.Information", "information")
+                    b.HasOne("EduLearn.Models.Information", "information")
                         .WithMany("SMLinks")
                         .HasForeignKey("infoID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1228,39 +1228,39 @@ namespace PowerSoft_IT.Migrations
                     b.Navigation("childrens");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Course", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Course", b =>
                 {
                     b.Navigation("Students");
 
                     b.Navigation("Teachers");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.CourseCategory", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.CourseCategory", b =>
                 {
                     b.Navigation("Courses");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.PaymentGetway", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.PaymentGetway", b =>
                 {
                     b.Navigation("GetwayInfo");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Popup", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Popup", b =>
                 {
                     b.Navigation("sitePopups");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Areas.Admin.Models.Slider", b =>
+            modelBuilder.Entity("EduLearn.Areas.Admin.Models.Slider", b =>
                 {
                     b.Navigation("SliderBtns");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.Information", b =>
+            modelBuilder.Entity("EduLearn.Models.Information", b =>
                 {
                     b.Navigation("SMLinks");
                 });
 
-            modelBuilder.Entity("PowerSoft_IT.Models.Product", b =>
+            modelBuilder.Entity("EduLearn.Models.Product", b =>
                 {
                     b.Navigation("RelatedProducts");
                 });

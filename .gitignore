@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# LMS uploads (course thumbnails, lesson files, submissions)
+PowerSoft_IT/wwwroot/uploads/

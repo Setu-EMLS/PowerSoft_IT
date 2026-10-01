@@ -1,0 +1,32 @@
+@model List<TeacherEntity>
+@{
+    ViewData["Title"] = "Instructors";
+    ViewData["Description"] = "Meet the EduLearn instructors — experienced professionals who teach web development, design, marketing and more.";
+}
+<partial name="_PageHero" model="@(new PageHero("Meet our instructors", "Experienced professionals who teach what they practise every day — and support you long after the course ends.", null, ("Instructors", null)))" />
+
+<section class="ps-section">
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var t in Model)
+            {
+                <div class="col-sm-6 col-lg-4 col-xl-3" data-aos="fade-up"><partial name="_MentorCard" model="t" /></div>
+            }
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="empty-box"><i class="bi bi-person-video3"></i>Our instructor profiles are coming soon.</div>
+        }
+
+        <div class="ps-card mt-5 d-flex flex-wrap justify-content-between align-items-center gap-3" data-aos="fade-up">
+            <div class="d-flex align-items-center gap-3">
+                <span class="ic-orange d-inline-flex align-items-center justify-content-center rounded-4" style="width:56px;height:56px;font-size:1.5rem"><i class="bi bi-person-plus"></i></span>
+                <div>
+                    <h4 class="mb-1">Want to teach with EduLearn?</h4>
+                    <p class="mb-0 text-muted-ps">We're always looking for skilled professionals who love sharing what they know.</p>
+                </div>
+            </div>
+            <a href="/ContactUs?subject=Teach%20with%20EduLearn" class="btn-ps">Get in touch <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</section>

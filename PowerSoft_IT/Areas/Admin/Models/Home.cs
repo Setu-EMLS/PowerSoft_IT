@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PowerSoft_IT.Areas.Admin.Models
+namespace EduLearn.Areas.Admin.Models
 {
 	public class Home	{
 		public int Id { get; set; }

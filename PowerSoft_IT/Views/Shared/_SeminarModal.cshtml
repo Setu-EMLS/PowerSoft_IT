@@ -1,0 +1,46 @@
+@{
+    var here = Context.Request.Path + Context.Request.QueryString;
+}
+<div class="modal fade ps-modal" id="seminarModal" tabindex="-1" aria-labelledby="seminarTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-head">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <span class="eyebrow on-dark">100% free</span>
+                <h3 id="seminarTitle">Join our free seminar</h3>
+                <p class="mb-0">Check your skill level, meet our mentors and find the right course — no cost, no obligation.</p>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Inquiry" asp-action="Seminar" method="post" class="ps-form">
+                    <input type="hidden" name="returnUrl" value="@here" />
+                    <div class="hp-field" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+                    <div class="mb-3">
+                        <label class="form-label" for="semCourse">Course you're interested in</label>
+                        <select class="form-select" id="semCourse" name="course" required>
+                            @foreach (var c in SiteInfo.SeminarCourses)
+                            {
+                                <option value="@c">@c</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="semName">Full name</label>
+                        <div class="input-icon"><i class="bi bi-person"></i><input class="form-control" id="semName" name="name" required maxlength="150" placeholder="Your name" /></div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <label class="form-label" for="semPhone">Phone</label>
+                            <div class="input-icon"><i class="bi bi-telephone"></i><input class="form-control" id="semPhone" name="phone" type="tel" required maxlength="30" placeholder="01XXXXXXXXX" /></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label" for="semEmail">Email</label>
+                            <div class="input-icon"><i class="bi bi-envelope"></i><input class="form-control" id="semEmail" name="email" type="email" required maxlength="200" placeholder="you@example.com" /></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-ps w-100">Reserve my free seat <i class="bi bi-arrow-right"></i></button>
+                    <p class="small text-muted-ps text-center mt-3 mb-0"><i class="bi bi-shield-check me-1"></i>We'll only use your details to contact you about the seminar.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

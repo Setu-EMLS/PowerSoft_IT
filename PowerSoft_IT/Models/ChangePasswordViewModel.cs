@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PowerSoft_IT.Models
+namespace EduLearn.Models
 {
 	public class ChangePasswordViewModel
 	{

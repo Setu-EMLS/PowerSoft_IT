@@ -1,0 +1,11 @@
+@model Course
+@{
+    ViewData["Title"] = "New Course";
+}
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <partial name="_CourseForm" model="Model" />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-brand px-4">Create course</button>
+        <a asp-action="Index" class="btn btn-light">Cancel</a>
+    </div>
+</form>

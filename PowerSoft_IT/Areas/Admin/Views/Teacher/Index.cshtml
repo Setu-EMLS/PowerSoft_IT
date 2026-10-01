@@ -1,0 +1,68 @@
+@model List<TeacherEntity>
+@{
+    ViewData["Title"] = "Teachers";
+}
+<div class="page-head">
+    <div>
+        <h2>Teachers</h2>
+        <p>Teacher accounts can manage the content, assignments and quizzes of the courses assigned to them.</p>
+    </div>
+    <a asp-action="Create" class="btn btn-brand"><i class="fa-solid fa-user-plus me-1"></i> Add teacher</a>
+</div>
+
+<div class="card-lms">
+    <div class="card-lms-body">
+        <div class="table-responsive">
+            <table class="table datatable">
+                <thead>
+                    <tr><th>Teacher</th><th>ID</th><th>Contact</th><th>Courses</th><th>Status</th><th class="no-sort text-end">Actions</th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model)
+                    {
+                        var active = t.User?.IsActive ?? false;
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="@UiHelpers.Avatar(t.PhotoPath)" class="avatar-sm" alt="" />
+                                    <div>
+                                        <div class="fw-semibold">@t.Name</div>
+                                        <small class="text-muted">@t.Designation</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><code>@t.TeacherID</code></td>
+                            <td><div>@t.Email</div><small class="text-muted">@t.Contact</small></td>
+                            <td>
+                                @foreach (var c in t.Courses)
+                                {
+                                    <span class="badge bg-light text-dark border me-1">@c.Title</span>
+                                }
+                                @if (!t.Courses.Any()) { <span class="text-muted">—</span> }
+                            </td>
+                            <td>
+                                @if (t.User == null) { <span class="badge bg-secondary">No login</span> }
+                                else if (active) { <span class="badge bg-success">Active</span> }
+                                else { <span class="badge bg-danger">Inactive</span> }
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Edit" asp-route-id="@t.Id" class="btn btn-sm btn-outline-primary" title="Edit"><i class="fa-solid fa-pen"></i></a>
+                                @if (t.User != null)
+                                {
+                                    <form asp-action="ToggleActive" asp-route-id="@t.Id" method="post" class="inline-form">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary" title="@(active ? "Deactivate" : "Activate")">
+                                            <i class="fa-solid @(active ? "fa-user-lock" : "fa-user-check")"></i>
+                                        </button>
+                                    </form>
+                                }
+                                <form asp-action="Delete" asp-route-id="@t.Id" method="post" class="inline-form" data-confirm="Delete teacher '@t.Name' and their login?">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

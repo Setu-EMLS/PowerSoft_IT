@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using EduLearn.Infrastructure;
+using EduLearn.Models.ViewModels;
 
-namespace PowerSoft_IT.Controllers
+namespace EduLearn.Controllers
 {
     public class RegisterController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string? returnUrl = null)
         {
-            return View();
+            if (User.Identity?.IsAuthenticated == true)
+                return Redirect(User.DashboardUrl());
+
+            return View(new RegisterViewModel { ReturnUrl = returnUrl });
         }
     }
 }

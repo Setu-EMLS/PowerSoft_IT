@@ -1,0 +1,30 @@
+@model EduLearn.Areas.Admin.Models.Course
+@{
+    // Callers wrap this card in their own grid column.
+    var lessons = Model.Sections.Sum(s => s.Lessons.Count);
+    var students = Model.Enrollments.Count(e => e.HasAccess);
+    (string Text, string Css, string Icon)? badge =
+        Model.IsFree ? ("Free", "b-green", "bi-gift")
+        : Model.CreatedAt > DateTime.Now.AddDays(-45) ? ("New", "b-blue", "bi-stars")
+        : students >= 5 ? ("Popular", "b-pink", "bi-fire")
+        : null;
+}
+<a href="/Courses/Details/@Model.Id" class="ps-course-card">
+    <div class="thumb">
+        <img src="@UiHelpers.CourseImage(Model.ThumbnailPath)" alt="@Model.Title" loading="lazy" />
+        @if (badge != null) { <span class="course-badge @badge.Value.Css"><i class="bi @badge.Value.Icon"></i>@badge.Value.Text</span> }
+    </div>
+    <div class="body">
+        @if (Model.Coursecategory != null) { <div class="cat">@Model.Coursecategory.Title</div> }
+        <h3>@Model.Title</h3>
+        <div class="meta">
+            <span><i class="bi bi-people"></i>@students student@(students == 1 ? "" : "s")</span>
+            @if (lessons > 0) { <span><i class="bi bi-play-circle"></i>@lessons lessons</span> }
+            @if (!string.IsNullOrEmpty(Model.Level)) { <span><i class="bi bi-bar-chart"></i>@Model.Level</span> }
+        </div>
+        <div class="foot">
+            <span class="price @(Model.IsFree ? "free" : "")">@UiHelpers.Money(Model.Price)</span>
+            <span class="go">Enroll Now <i class="bi bi-arrow-right"></i></span>
+        </div>
+    </div>
+</a>

@@ -1,37 +1,20 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Student Dashboard </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <!-- Favicon -->
-    <link rel="icon" href="~/images/logo/powersoft-logo.png" />
-    <link rel="apple-touch-icon" href="~/images/logo/powersoft-logo.png" />
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["PanelName"] = "Student Panel";
+}
+@section Sidebar {
+    <a href="/Student" class="@ViewContext.ActiveIf("Home", "Index")"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
 
-    <link href="~/css/dashboard.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar text-white">
-                <div class="text-center mb-4">
-                    <i class="fas fa-user-graduate fa-3x"></i>
-                </div>
-                <a href="#" class="active"><i class="fas fa-home me-2"></i> Dashboard</a>
-                <a href="#"><i class="fas fa-book-open me-2"></i> My Courses</a>
-                <a href="#"><i class="fas fa-tasks me-2"></i> Assignments</a>
-                <a href="#"><i class="fas fa-chart-bar me-2"></i> Grades</a>
-                <a href="#"><i class="fas fa-bell me-2"></i> Announcements</a>
-                <a href="/home/logout"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
-            </div>
-
-          @RenderBody();
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="dash-nav-heading">Learning</div>
+    <a href="/Student/Courses" class="@ViewContext.ActiveIf("Courses", "Index")@ViewContext.ActiveIf("Learn")"><i class="fa-solid fa-book-open"></i> My Courses</a>
+    <a href="/Student/Courses/Browse" class="@ViewContext.ActiveIf("Courses", "Browse")@ViewContext.ActiveIf("Enroll")"><i class="fa-solid fa-magnifying-glass"></i> Browse Courses</a>
+    <a href="/Student/Assignments" class="@ViewContext.ActiveIf("Assignments")"><i class="fa-solid fa-list-check"></i> Assignments</a>
+    <a href="/Student/Quizzes" class="@ViewContext.ActiveIf("Quizzes")"><i class="fa-solid fa-circle-question"></i> Quizzes</a>
+    <a href="/Student/Grades" class="@ViewContext.ActiveIf("Grades")"><i class="fa-solid fa-chart-line"></i> Grades</a>
+    <a href="/Student/Schedule" class="@ViewContext.ActiveIf("Schedule")"><i class="fa-regular fa-calendar"></i> Class Schedule</a>
+    <a href="/Student/Announcements" class="@ViewContext.ActiveIf("Announcements")"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+    <a href="/Student/Certificates" class="@ViewContext.ActiveIf("Certificates")"><i class="fa-solid fa-award"></i> Certificates</a>
+}
+@section Styles { @RenderSection("Styles", required: false) }
+@section Scripts { @RenderSection("Scripts", required: false) }
+@RenderBody()

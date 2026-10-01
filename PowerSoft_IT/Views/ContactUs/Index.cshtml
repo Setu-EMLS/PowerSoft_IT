@@ -1,107 +1,68 @@
-﻿<main class="main">
+@{
+    ViewData["Title"] = "Contact";
+    ViewData["Description"] = "Contact EduLearn in Kazipara, Mirpur, Dhaka — call, email or send us a message about courses, seminars or software projects.";
+    var subject = Context.Request.Query["subject"].ToString();
+}
+<partial name="_PageHero" model="@(new PageHero("Let's talk", "Questions about a course, a seminar or a software project? Send us a message — we usually reply within one working day.", null, ("Contact", null)))" />
 
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-            <div class="container">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <h1>Contact</h1>
-                        <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
-                    </div>
-                </div>
+<section class="ps-section">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                <div class="info-card"><span class="ic ic-orange"><i class="bi bi-geo-alt"></i></span><div><h5>Visit us</h5><p>@SiteInfo.AddressLine1, @SiteInfo.AddressLine2</p></div></div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="info-card"><span class="ic ic-green"><i class="bi bi-telephone"></i></span><div><h5>Call us</h5><a href="tel:@SiteInfo.Phone">@SiteInfo.PhoneDisplay</a><a href="tel:@SiteInfo.Phone2">@SiteInfo.Phone2Display</a></div></div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="info-card"><span class="ic ic-blue"><i class="bi bi-envelope"></i></span><div><h5>Email us</h5><a href="mailto:@SiteInfo.SupportEmail">@SiteInfo.SupportEmail</a><a href="mailto:@SiteInfo.HrEmail">@SiteInfo.HrEmail</a></div></div>
+            </div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="info-card"><span class="ic ic-violet"><i class="bi bi-clock"></i></span><div><h5>Office hours</h5><p>@SiteInfo.OfficeHours</p></div></div>
             </div>
         </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current">Contact</li>
-                </ol>
-            </div>
-        </nav>
-    </div><!-- End Page Title -->
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
 
-        <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-            <iframe style="border:0; width: 100%; height: 300px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7301.181973949841!2d90.372881!3d23.797575!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c15dac058dd7%3A0x7f39befc210c74b5!2sPowersoftIT!5e0!3m2!1sen!2sbd!4v1748097044229!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div><!-- End Google Maps -->
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="row gy-4">
-
-                <div class="col-lg-4">
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <i class="bi bi-geo-alt flex-shrink-0"></i>
-                        <div>
-                            <h3>Address</h3>
-                            <p>
-                                PowerSoftIT
-                                567(2nd floor)Near 285 no pillar,East-Kazipara,Kazipara, MirpurDhaka-1216
-                            </p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                        <i class="bi bi-telephone flex-shrink-0"></i>
-                        <div>
-                            <h3>Call Us</h3>
-                            <p>
-                                +8801771511805,+8801913168904
-                            </p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-                        <i class="bi bi-envelope flex-shrink-0"></i>
-                        <div>
-                            <h3>Email Us</h3>
-                            <a href="mailto:powersoftit2020@gmail.com">support@powersoftit.com</a>
-                            <a href="mailto:powersoftit2020@gmail.com">powersoftit2020@gmail.com</a>
-                            <a href="mailto:hr@powersoftit.com">hr@powersoftit.com</a>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                </div>
-
-                <div class="col-lg-8">
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                        <div class="row gy-4">
-
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-7" data-aos="fade-up">
+                <div class="form-panel h-100">
+                    <h2 class="h3 mb-1" style="font-weight:800">Send us a message</h2>
+                    <p class="text-muted-ps mb-4">Fill in the form and our team will get back to you.</p>
+                    <form asp-controller="Inquiry" asp-action="Contact" method="post" class="ps-form">
+                        <input type="hidden" name="returnUrl" value="/ContactUs" />
+                        <div class="hp-field" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+                        <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                                <label class="form-label" for="cName">Your name</label>
+                                <input class="form-control" id="cName" name="name" required maxlength="150" />
                             </div>
-
-                            <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                            <div class="col-md-6">
+                                <label class="form-label" for="cEmail">Email</label>
+                                <input class="form-control" id="cEmail" name="email" type="email" required maxlength="200" />
                             </div>
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                            <div class="col-md-6">
+                                <label class="form-label" for="cPhone">Phone <span class="text-muted-ps fw-normal">(optional)</span></label>
+                                <input class="form-control" id="cPhone" name="phone" type="tel" maxlength="30" />
                             </div>
-
-                            <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                            <div class="col-md-6">
+                                <label class="form-label" for="cSubject">Subject</label>
+                                <input class="form-control" id="cSubject" name="subject" value="@subject" maxlength="200" placeholder="Course inquiry, project, feedback..." />
                             </div>
-
-                            <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                <button type="submit">Send Message</button>
+                            <div class="col-12">
+                                <label class="form-label" for="cMessage">Message</label>
+                                <textarea class="form-control" id="cMessage" name="message" rows="6" required maxlength="4000"></textarea>
                             </div>
-
+                            <div class="col-12">
+                                <button type="submit" class="btn-ps btn-lg">Send message <i class="bi bi-send"></i></button>
+                            </div>
                         </div>
                     </form>
-                </div><!-- End Contact Form -->
-
+                </div>
             </div>
-
+            <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="map-frame h-100">
+                    <iframe src="@SiteInfo.MapEmbedUrl" title="EduLearn on Google Maps" style="height:100%;min-height:380px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
-
-    </section><!-- /Contact Section -->
-
-</main>
+    </div>
+</section>

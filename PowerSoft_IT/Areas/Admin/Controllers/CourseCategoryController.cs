@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PowerSoft_IT.Areas.Admin.Models;
-using PowerSoft_IT.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using EduLearn.Areas.Admin.Models;
+using EduLearn.Models;
 
-namespace PowerSoft_IT.Areas.Admin.Controllers
+namespace EduLearn.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize(Roles = "Admin")]
 	public class CourseCategoryController : Controller
 	{
 		private readonly ApplicationDbContext _context;
@@ -14,74 +16,68 @@ namespace PowerSoft_IT.Areas.Admin.Controllers
 		{
 			_context = context;
 		}
-		[HttpGet]
+
 		public async Task<IActionResult> Index()
 		{
-			return View();
-		}
-			// GET: /CourseCategory/GetAll
-			[HttpGet]
-		public async Task<IActionResult> GetAll()
-		{
-			var data = await _context.CourseCategorys
-				.Select(c => new
-				{
-					c.Id,
-					c.Title,
-					c.Description
-				})
+			var categories = await _context.CourseCategorys
+				.Include(c => c.Courses)
+				.OrderBy(c => c.Title)
 				.ToListAsync();
-
-			return Json(new { data });
+			return View(categories);
 		}
 
-		// POST: /CourseCategory/Create
 		[HttpPost]
-		public async Task<IActionResult> Create([FromBody] CourseCategory model)
+		public async Task<IActionResult> Create(CourseCategory model)
 		{
 			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+			{
+				TempData["Error"] = string.Join(" ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+				return RedirectToAction(nameof(Index));
+			}
 
-			await _context.CourseCategorys.AddAsync(model);
+			_context.CourseCategorys.Add(new CourseCategory { Title = model.Title.Trim(), Description = model.Description });
 			await _context.SaveChangesAsync();
-
-			return Json(new { success = true, message = "Category added successfully." });
+			TempData["Success"] = "Category added successfully.";
+			return RedirectToAction(nameof(Index));
 		}
 
-		// GET: /CourseCategory/GetById/5
-		[HttpGet]
-		public async Task<IActionResult> GetById(int id)
+		public async Task<IActionResult> Edit(int id)
 		{
 			var category = await _context.CourseCategorys.FindAsync(id);
 			if (category == null) return NotFound();
-
-			return Json(category);
+			return View(category);
 		}
 
-		// POST: /CourseCategory/Update
 		[HttpPost]
-		public async Task<IActionResult> Update([FromBody] CourseCategory model)
+		public async Task<IActionResult> Edit(int id, CourseCategory model)
 		{
-			if (!ModelState.IsValid)
-				return BadRequest(ModelState);
+			var category = await _context.CourseCategorys.FindAsync(id);
+			if (category == null) return NotFound();
+			if (!ModelState.IsValid) return View(model);
 
-			_context.CourseCategorys.Update(model);
+			category.Title = model.Title.Trim();
+			category.Description = model.Description;
 			await _context.SaveChangesAsync();
-
-			return Json(new { success = true, message = "Category updated successfully." });
+			TempData["Success"] = "Category updated successfully.";
+			return RedirectToAction(nameof(Index));
 		}
 
-		// DELETE: /CourseCategory/Delete/5
-		[HttpDelete]
+		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var category = await _context.CourseCategorys.FindAsync(id);
+			var category = await _context.CourseCategorys.Include(c => c.Courses).FirstOrDefaultAsync(c => c.Id == id);
 			if (category == null) return NotFound();
+
+			if (category.Courses.Any())
+			{
+				TempData["Error"] = $"\"{category.Title}\" still has {category.Courses.Count} course(s). Move or delete them first.";
+				return RedirectToAction(nameof(Index));
+			}
 
 			_context.CourseCategorys.Remove(category);
 			await _context.SaveChangesAsync();
-
-			return Json(new { success = true, message = "Category deleted successfully." });
+			TempData["Success"] = "Category deleted successfully.";
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

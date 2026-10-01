@@ -1,109 +1,56 @@
-﻿<main class="main">
+@{
+    ViewData["Title"] = "Services";
+    ViewData["Description"] = "Custom web development, learning management systems, real estate and healthcare platforms, digital marketing and business analytics by EduLearn.";
+    var services = new (string Title, string Icon, string Tone, string Text)[]
+    {
+        ("Custom web development", "bi-laptop", "ic-orange", "Tailored websites and platforms using ASP.NET, PHP or React for your unique business needs."),
+        ("Learning management systems", "bi-mortarboard", "ic-blue", "Robust LMS platforms for institutions and training centers, with reporting, certification and e-learning tools."),
+        ("Real estate platforms", "bi-building", "ic-violet", "Dynamic, responsive real estate websites with listing management and integrated CRM features."),
+        ("Healthcare solutions", "bi-heart-pulse", "ic-pink", "Secure, scalable software for hospitals, clinics and diagnostic centers — including PACS and patient portals."),
+        ("Digital marketing", "bi-megaphone", "ic-amber", "SEO, social media marketing and content strategies that drive traffic and boost brand awareness."),
+        ("Business analytics", "bi-graph-up", "ic-green", "Data-driven dashboards and reporting tools that support strategic decisions and performance tracking.")
+    };
+}
+<partial name="_PageHero" model="@(new PageHero("Our services", "Explore the range of solutions we provide to accelerate your digital journey — designed, built and supported by our in-house team.", null, ("Services", null)))" />
 
-    <!-- Hero Section -->
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-            <div class="container">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <h1>Our Services</h1>
-                        <p class="mb-0">Explore the range of solutions we provide to accelerate your digital journey.</p>
-                    </div>
-                </div>
-            </div>
+<section class="ps-section">
+    <div class="container">
+        <div class="section-head" data-aos="fade-up">
+            <span class="eyebrow">What we do</span>
+            <h2>Solutions that move your business forward</h2>
+            <p>From a single website to a complete learning platform, we take projects from idea to launch — and keep them running.</p>
         </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current">Service</li>
-                </ol>
-            </div>
-        </nav>
-    </div><!-- End Page Title -->
-    <!-- Services Section -->
-    <section class="services py-5">
-        <div class="container">
-            <div class="row text-center">
-
-                <!-- Service 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-laptop fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Custom Web Development</h5>
-                            <p class="card-text">Tailored websites and platforms using ASP.NET, PHP, or React for your unique business needs.</p>
-                        </div>
+        <div class="row g-4">
+            @for (var i = 0; i < services.Length; i++)
+            {
+                var s = services[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@((i % 3) * 80)">
+                    <div class="feature-card">
+                        <span class="ic @s.Tone"><i class="bi @s.Icon"></i></span>
+                        <h3>@s.Title</h3>
+                        <p>@s.Text</p>
                     </div>
                 </div>
-
-                <!-- Service 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-mortarboard fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Learning Management Systems</h5>
-                            <p class="card-text">Robust LMS platforms for educational institutions and training centers with reporting, certification, and e-learning tools.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-building fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Real Estate Platforms</h5>
-                            <p class="card-text">Dynamic and responsive real estate websites with listing management and integrated CRM features.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-heart-pulse fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Healthcare Solutions</h5>
-                            <p class="card-text">Secure and scalable software for hospitals, clinics, and diagnostic centers – including PACS and patient portals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-megaphone fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Digital Marketing</h5>
-                            <p class="card-text">SEO, social media marketing, and content strategies that drive traffic and boost brand awareness.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <i class="bi bi-graph-up fs-1 text-primary mb-3"></i>
-                            <h5 class="card-title">Business Analytics</h5>
-                            <p class="card-text">Data-driven dashboards and reporting tools to support strategic decision-making and performance tracking.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            }
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="contact-cta  text-white text-center py-5">
-        <div class="container">
-            <h2 class="text-white">Ready to Start Your Project?</h2>
-            <p>Contact us today to schedule a consultation or request a custom quote.</p>
-            <a href="/contactUs" class="btn btn-light mt-3">Get in Touch</a>
+<section class="ps-section ps-dark">
+    <div class="container">
+        <div class="section-head" data-aos="fade-up">
+            <span class="eyebrow on-dark">Our process</span>
+            <h2>How we deliver your project</h2>
+            <p>A clear, collaborative process so you always know what's next.</p>
         </div>
-    </section>
-
-</main>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up"><div class="feature-card"><span class="ic ic-orange"><i class="bi bi-search"></i></span><h3>1. Discover</h3><p>We learn your goals, users and requirements, then agree on scope and timeline.</p></div></div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80"><div class="feature-card"><span class="ic ic-blue"><i class="bi bi-vector-pen"></i></span><h3>2. Design</h3><p>Wireframes and a visual design you approve before a single line of code.</p></div></div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160"><div class="feature-card"><span class="ic ic-violet"><i class="bi bi-code-square"></i></span><h3>3. Develop</h3><p>Agile development with regular demos, so you see progress every week.</p></div></div>
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="240"><div class="feature-card"><span class="ic ic-green"><i class="bi bi-rocket-takeoff"></i></span><h3>4. Launch & support</h3><p>Deployment, training for your team and ongoing maintenance after go-live.</p></div></div>
+        </div>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="/ContactUs?subject=Project%20inquiry" class="btn-ps btn-lg">Discuss your project <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</section>

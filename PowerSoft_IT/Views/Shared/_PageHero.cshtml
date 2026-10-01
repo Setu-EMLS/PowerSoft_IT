@@ -1,0 +1,19 @@
+@model PageHero
+<section class="page-hero">
+    <div class="container">
+        <ol class="crumbs" aria-label="Breadcrumb">
+            <li><a href="/"><i class="bi bi-house-door me-1"></i>Home</a></li>
+            @foreach (var c in Model.Crumbs)
+            {
+                if (c.Url != null) { <li><a href="@c.Url">@c.Label</a></li> }
+                else { <li class="current">@c.Label</li> }
+            }
+        </ol>
+        <h1>@Model.Title</h1>
+        @if (!string.IsNullOrEmpty(Model.Subtitle))
+        {
+            <p class="sub">@Model.Subtitle</p>
+        }
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0,44 C360,76 640,8 980,30 C1180,44 1320,34 1440,20 L1440,70 L0,70 Z" fill="#ffffff" /></svg>
+</section>

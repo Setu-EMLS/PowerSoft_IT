@@ -1,0 +1,101 @@
+@model Lesson
+@{
+    var sec = (CourseSection)ViewBag.Section;
+    var isNew = Model.Id == 0;
+    ViewData["Title"] = isNew ? "Add Lesson" : "Edit Lesson";
+}
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/Teacher/Curriculum/Index/@sec.CourseId">@sec.Course.Title</a></li>
+        <li class="breadcrumb-item">@sec.Title</li>
+        <li class="breadcrumb-item active">@(isNew ? "New lesson" : Model.Title)</li>
+    </ol>
+</nav>
+
+<form asp-action="@(isNew ? "CreateLesson" : "EditLesson")" asp-route-id="@(isNew ? (int?)null : Model.Id)" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="SectionId" />
+    <div asp-validation-summary="ModelOnly" class="mb-3"></div>
+    <div class="row g-3">
+        <div class="col-lg-8">
+            <div class="card-lms">
+                <div class="card-lms-body">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" placeholder="e.g. Introduction to Controllers" />
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label d-block">Lesson type</label>
+                        <div class="btn-group flex-wrap" role="group">
+                            @foreach (var t in Enum.GetValues<LessonType>())
+                            {
+                                <input type="radio" class="btn-check" name="Type" id="type-@t" value="@t" checked="@(Model.Type == t)" />
+                                <label class="btn btn-outline-brand" for="type-@t"><i class="fa-solid @UiHelpers.LessonIcon(t) me-1"></i>@t</label>
+                            }
+                        </div>
+                    </div>
+                    <div class="mb-3" data-show-for="Video Link">
+                        <label asp-for="Url" class="form-label"></label>
+                        <input asp-for="Url" class="form-control" placeholder="https://www.youtube.com/watch?v=..." />
+                        <small class="text-muted" data-show-for="Video">YouTube, Vimeo or Google Drive links are embedded in the player. You can also upload an .mp4 below.</small>
+                        <span asp-validation-for="Url" class="d-block"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Content" class="form-label"><span data-show-for="Article">Article</span><span data-show-for="Video Link File">Notes / description</span></label>
+                        <textarea asp-for="Content" class="form-control" rows="10" placeholder="Text shown to students with this lesson. Line breaks are kept."></textarea>
+                        <span asp-validation-for="Content"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card-lms mb-3">
+                <div class="card-lms-header"><h6>Attachment</h6></div>
+                <div class="card-lms-body">
+                    @if (!string.IsNullOrEmpty(Model.AttachmentPath))
+                    {
+                        <div class="mb-2 small">
+                            <i class="fa-solid fa-paperclip me-1"></i><a href="@Model.AttachmentPath" target="_blank">Current file</a>
+                            <div class="form-check mt-1">
+                                <input class="form-check-input" type="checkbox" name="removeAttachment" value="true" id="removeAttachment" />
+                                <label class="form-check-label" for="removeAttachment">Remove current file</label>
+                            </div>
+                        </div>
+                    }
+                    <input asp-for="Attachment" type="file" class="form-control" />
+                    <small class="text-muted d-block mt-1">PDF, Office files, ZIP, images or MP4 — up to 100 MB.</small>
+                    <span asp-validation-for="Attachment"></span>
+                </div>
+            </div>
+            <div class="card-lms mb-3">
+                <div class="card-lms-header"><h6>Settings</h6></div>
+                <div class="card-lms-body">
+                    <div class="mb-3">
+                        <label asp-for="DurationMinutes" class="form-label"></label>
+                        <input asp-for="DurationMinutes" class="form-control" type="number" min="0" />
+                    </div>
+                    <div class="form-check form-switch">
+                        <input asp-for="IsPreview" class="form-check-input" role="switch" />
+                        <label asp-for="IsPreview" class="form-check-label">Free preview (visible on the public course page)</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-brand w-100 mb-2">@(isNew ? "Add lesson" : "Save lesson")</button>
+            <a href="/Teacher/Curriculum/Index/@sec.CourseId" class="btn btn-light w-100">Cancel</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Show only the fields that matter for the chosen lesson type
+        function syncType() {
+            var type = document.querySelector('input[name="Type"]:checked')?.value;
+            document.querySelectorAll('[data-show-for]').forEach(function (el) {
+                el.style.display = el.getAttribute('data-show-for').split(' ').includes(type) ? '' : 'none';
+            });
+        }
+        document.querySelectorAll('input[name="Type"]').forEach(function (r) { r.addEventListener('change', syncType); });
+        syncType();
+    </script>
+}

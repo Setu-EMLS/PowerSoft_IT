@@ -1,89 +1,63 @@
-﻿<main class="main">
+@{
+    ViewData["Title"] = "Student Reviews";
+    ViewData["Description"] = "Hear what EduLearn learners say about our courses, mentors and support.";
+    var reviews = new (string Name, string Role, string Photo, int Stars, string Text)[]
+    {
+        ("Rahim Hossain", "Web Development Student", "/Images/users/male_student.jpeg", 5, "The course was amazing! The instructors were supportive, and I built real-world projects that helped me land a job."),
+        ("Sadia Akter", "Digital Marketing Graduate", "/Images/users/Fe_teacher.jpeg", 4, "It was a game-changer for my career. The hands-on experience and mentorship were exactly what I needed."),
+        ("Jarin Islam", "Software Development Batch", "/Images/users/student.png", 5, "Great support and a modern curriculum. I especially liked how they focused on practical skills.")
+    };
+    var average = reviews.Average(r => r.Stars);
+}
+<partial name="_PageHero" model="@(new PageHero("Student reviews", "Hear what our learners have to say about their experience with EduLearn.", null, ("Student reviews", null)))" />
 
-    <!-- Hero Section -->
-
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-            <div class="container">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <h1> Student Feedback</h1>
-                        <p class="mb-0">Hear what our learners have to say about their experience with us.</p>
+<section class="ps-section">
+    <div class="container">
+        <div class="row g-4 align-items-stretch mb-5">
+            <div class="col-lg-4" data-aos="fade-up">
+                <div class="ps-card h-100 text-center d-flex flex-column justify-content-center">
+                    <div style="font-size:3.4rem;font-weight:800;color:var(--ps-navy-900);line-height:1">@average.ToString("0.0")</div>
+                    <div class="stars my-2" style="color:#FFB020;letter-spacing:3px;font-size:1.2rem">★★★★★</div>
+                    <p class="text-muted-ps mb-0">Average rating from our learners</p>
+                </div>
+            </div>
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="80">
+                <div class="ps-card h-100">
+                    <h3 class="h5 mb-3">What learners value most</h3>
+                    <div class="includes-grid">
+                        <div><i class="bi bi-person-check"></i>Supportive mentors</div>
+                        <div><i class="bi bi-kanban"></i>Real-world projects</div>
+                        <div><i class="bi bi-briefcase"></i>Career & job support</div>
+                        <div><i class="bi bi-lightning-charge"></i>Practical, modern curriculum</div>
+                        <div><i class="bi bi-camera-video"></i>Recorded class videos</div>
+                        <div><i class="bi bi-life-preserver"></i>Lifetime support</div>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current">Student feedback</li>
-                </ol>
-            </div>
-        </nav>
-    </div><!-- End Page Title -->
-    <!-- Feedback Cards -->
-    <section class="student-feedback py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <!-- Feedback Item -->
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <img src="~/Images/users/male_student.jpeg" class="rounded-circle mb-3" width="80" alt="Student Photo">
-                            <h5 class="card-title">Rahim Hossain</h5>
-                            <p class="text-muted">Web Development Student</p>
-                            <p class="card-text">“The course was amazing! The instructors were supportive, and I built real-world projects that helped me land a job.”</p>
-                            <div class="text-warning">
-                                ★★★★★
-                            </div>
+
+        <div class="row g-4">
+            @for (var i = 0; i < reviews.Length; i++)
+            {
+                var r = reviews[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(i * 80)">
+                    <div class="testimonial-card">
+                        <span class="quote"><i class="bi bi-quote"></i></span>
+                        <div class="stars">@(new string('★', r.Stars))<span class="text-muted-ps">@(new string('★', 5 - r.Stars))</span></div>
+                        <blockquote>“@r.Text”</blockquote>
+                        <div class="who">
+                            <img src="@r.Photo" alt="@r.Name" />
+                            <div><strong>@r.Name</strong><small>@r.Role</small></div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Another Feedback -->
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <img src="~/Images/users/Fe_teacher.jpeg" class="rounded-circle mb-3" width="80" alt="Student Photo">
-                            <h5 class="card-title">Sadia Akter</h5>
-                            <p class="text-muted">Digital Marketing Graduate</p>
-                            <p class="card-text">“It was a game-changer for my career. The hands-on experience and mentorship were exactly what I needed.”</p>
-                            <div class="text-warning">
-                                ★★★★☆
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Another Feedback -->
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <img src="~/Images/users/student.png" class="rounded-circle mb-3" width="80" alt="Student Photo">
-                            <h5 class="card-title">Jarin Islam</h5>
-                            <p class="text-muted">Software Development Batch</p>
-                            <p class="card-text">“Great support and modern curriculum. I especially liked how they focused on practical skills.”</p>
-                            <div class="text-warning">
-                                ★★★★★
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add more testimonials as needed -->
-
-            </div>
+            }
         </div>
-    </section>
 
-    <!-- Feedback Submission CTA -->
-    <section class="py-5 contact-cta text-white text-center  ">
-        <div class="container">
-            <h2>Have Feedback to Share?</h2>
-            <p>We value your thoughts. Help us improve by sharing your experience.</p>
-            <a href="#contact" class="btn btn-light mt-3">Submit Feedback</a>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <h3 class="h4">Studied with us?</h3>
+            <p class="text-muted-ps">We value your thoughts. Help us improve by sharing your experience.</p>
+            <a href="/ContactUs?subject=Student%20feedback" class="btn-ps">Share your feedback <i class="bi bi-chat-heart"></i></a>
         </div>
-    </section>
-
-</main>
+    </div>
+</section>

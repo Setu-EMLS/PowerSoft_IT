@@ -1,0 +1,46 @@
+@model Enrollment?
+@{
+    ViewData["Title"] = "Verify Certificate";
+    ViewData["Description"] = "Check that an EduLearn certificate is genuine by entering its certificate number.";
+    string? number = ViewBag.Number;
+}
+<partial name="_PageHero" model="@(new PageHero("Verify a certificate", "Employers and institutions can confirm an EduLearn certificate by entering its number.", null, ("Verify certificate", null)))" />
+
+<section class="ps-section">
+    <div class="container" style="max-width:720px">
+        <div class="form-panel">
+            <form method="get" action="/Certificate/Verify" class="ps-form">
+                <label class="form-label" for="certNo">Certificate number</label>
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                    <div class="input-icon flex-grow-1">
+                        <i class="bi bi-patch-check"></i>
+                        <input id="certNo" name="id" value="@number" class="form-control" placeholder="e.g. EDU-2026-00001" required />
+                    </div>
+                    <button class="btn-ps">Verify <i class="bi bi-arrow-right"></i></button>
+                </div>
+            </form>
+
+            @if (Model != null)
+            {
+                <div class="verify-result ok mt-4">
+                    <i class="bi bi-patch-check-fill text-success"></i>
+                    <div>
+                        <h5 class="mb-1 text-success">Valid certificate</h5>
+                        <p class="mb-1"><strong>@Model.Student.Name</strong> (Student ID @Model.Student.StudentID) completed <strong>@Model.Course.Title</strong></p>
+                        <p class="mb-0 text-muted-ps small">Completed on @Model.CompletedAt?.ToString("dd MMMM yyyy") · Certificate No. @Model.CertificateNo</p>
+                    </div>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(number))
+            {
+                <div class="verify-result bad mt-4">
+                    <i class="bi bi-x-octagon-fill text-danger"></i>
+                    <div>
+                        <h5 class="mb-1 text-danger">Not found</h5>
+                        <p class="mb-0">No certificate was found with number <strong>@number</strong>. Please check the number and try again.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,101 @@
+@model Quiz
+@{
+    ViewData["Title"] = Model.Title;
+    var attempt = (QuizAttempt)ViewBag.Attempt;
+    int? secondsLeft = ViewBag.SecondsLeft;
+    var letters = "ABCDEFGHIJ";
+}
+<div class="row justify-content-center">
+    <div class="col-xl-8">
+        <div class="card-lms mb-3 quiz-timer">
+            <div class="card-lms-body d-flex flex-wrap justify-content-between align-items-center gap-2 py-3">
+                <div>
+                    <small class="text-muted">@Model.Course.Title</small>
+                    <h5 class="mb-0">@Model.Title</h5>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-muted small"><span id="answeredCount">0</span> / @Model.Questions.Count answered</span>
+                    @if (secondsLeft != null)
+                    {
+                        <span class="badge bg-dark fs-6" id="timer" data-seconds="@secondsLeft"><i class="fa-regular fa-clock me-1"></i><span>--:--</span></span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Submit" asp-route-id="@attempt.Id" method="post" id="quizForm">
+            @{ var n = 0; }
+            @foreach (var q in Model.Questions)
+            {
+                n++;
+                <div class="quiz-question">
+                    <div class="d-flex justify-content-between gap-2 mb-1">
+                        <div class="fw-semibold">@n. <span class="player-article">@q.Text</span></div>
+                        <span class="badge bg-light text-dark border align-self-start">@q.Marks mark@(q.Marks == 1 ? "" : "s")</span>
+                    </div>
+                    @for (var i = 0; i < q.Options.Count; i++)
+                    {
+                        var o = q.Options[i];
+                        <label class="quiz-option">
+                            <input class="form-check-input mt-0" type="radio" name="q_@q.Id" value="@o.Id" />
+                            <strong>@letters[i % letters.Length].</strong> <span>@o.Text</span>
+                        </label>
+                    }
+                </div>
+            }
+            <div class="d-flex justify-content-end gap-2 mb-4">
+                <button type="submit" class="btn btn-brand btn-lg px-5" id="submitQuiz">Submit quiz</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var form = document.getElementById('quizForm');
+            var submitting = false;
+            var total = @Model.Questions.Count;
+
+            function countAnswered() {
+                var names = new Set();
+                form.querySelectorAll('input[type=radio]:checked').forEach(function (r) { names.add(r.name); });
+                document.getElementById('answeredCount').textContent = names.size;
+                return names.size;
+            }
+            form.addEventListener('change', countAnswered);
+
+            form.addEventListener('submit', function (e) {
+                if (submitting) return;
+                var answered = countAnswered();
+                if (answered < total && !confirm('You answered ' + answered + ' of ' + total + ' questions. Submit anyway?')) {
+                    e.preventDefault();
+                    return;
+                }
+                submitting = true;
+            });
+
+            // Leaving mid-quiz loses nothing server-side, but warn anyway
+            window.addEventListener('beforeunload', function (e) { if (!submitting) { e.preventDefault(); e.returnValue = ''; } });
+
+            var timer = document.getElementById('timer');
+            if (timer) {
+                var left = parseInt(timer.getAttribute('data-seconds'), 10);
+                var label = timer.querySelector('span');
+                function tick() {
+                    var m = Math.floor(left / 60), s = left % 60;
+                    label.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                    if (left <= 60) timer.classList.replace('bg-dark', 'bg-danger');
+                    if (left <= 0) {
+                        submitting = true;
+                        form.submit();
+                        return;
+                    }
+                    left--;
+                    setTimeout(tick, 1000);
+                }
+                tick();
+            }
+        })();
+    </script>
+}

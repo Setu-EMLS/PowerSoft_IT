@@ -1,0 +1,53 @@
+@model QuizQuestion
+@{
+    // Shared by "add question" and "edit question". Options post as options[0..n], the correct one as correctIndex.
+    var options = Model.Options.Select(o => o.Text).ToList();
+    var correct = Model.Options.FindIndex(o => o.IsCorrect);
+    while (options.Count < 4) options.Add("");
+    if (correct < 0) correct = 0;
+}
+<div class="mb-3">
+    <label class="form-label" for="qText">Question</label>
+    <textarea class="form-control" id="qText" name="text" rows="2" required>@Model.Text</textarea>
+</div>
+<div class="mb-3" style="max-width:160px">
+    <label class="form-label" for="qMarks">Marks</label>
+    <input class="form-control" id="qMarks" name="marks" type="number" min="1" max="100" value="@(Model.Marks > 0 ? Model.Marks : 1)" required />
+</div>
+<label class="form-label">Answer options <small class="text-muted fw-normal">— select the correct one</small></label>
+<div id="optionRows">
+    @for (var i = 0; i < options.Count; i++)
+    {
+        <div class="input-group mb-2 option-row">
+            <span class="input-group-text"><input class="form-check-input mt-0" type="radio" name="correctIndex" value="@i" checked="@(i == correct)" aria-label="Correct answer" /></span>
+            <input class="form-control" name="options" value="@options[i]" placeholder="Option @(i + 1)" />
+            <button type="button" class="btn btn-outline-secondary remove-option" title="Remove"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    }
+</div>
+<button type="button" class="btn btn-sm btn-light mb-3" id="addOption"><i class="fa-solid fa-plus me-1"></i>Add option</button>
+<script>
+    (function () {
+        var rows = document.getElementById('optionRows');
+        function renumber() {
+            rows.querySelectorAll('.option-row').forEach(function (row, i) {
+                row.querySelector('input[type=radio]').value = i;
+                row.querySelector('input[name=options]').placeholder = 'Option ' + (i + 1);
+            });
+        }
+        document.getElementById('addOption').addEventListener('click', function () {
+            var clone = rows.querySelector('.option-row').cloneNode(true);
+            clone.querySelector('input[name=options]').value = '';
+            clone.querySelector('input[type=radio]').checked = false;
+            rows.appendChild(clone);
+            renumber();
+        });
+        rows.addEventListener('click', function (e) {
+            var btn = e.target.closest('.remove-option');
+            if (btn && rows.querySelectorAll('.option-row').length > 2) {
+                btn.closest('.option-row').remove();
+                renumber();
+            }
+        });
+    })();
+</script>

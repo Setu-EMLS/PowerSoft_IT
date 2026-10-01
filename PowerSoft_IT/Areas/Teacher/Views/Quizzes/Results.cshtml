@@ -1,0 +1,42 @@
+@model Quiz
+@{
+    ViewData["Title"] = "Results · " + Model.Title;
+    var attempts = (List<QuizAttempt>)ViewBag.Attempts;
+    var passed = attempts.Count(a => a.Passed);
+}
+<div class="page-head">
+    <div>
+        <h2>@Model.Title</h2>
+        <p>@Model.Course.Title · pass mark @Model.PassPercentage%</p>
+    </div>
+    <a asp-action="Questions" asp-route-id="@Model.Id" class="btn btn-outline-brand"><i class="fa-solid fa-list-ol me-1"></i>Questions</a>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-sm-4"><div class="stat-card"><span class="stat-icon tone-blue"><i class="fa-solid fa-pen-to-square"></i></span><div><div class="stat-value">@attempts.Count</div><div class="stat-label">Attempts</div></div></div></div>
+    <div class="col-sm-4"><div class="stat-card"><span class="stat-icon tone-teal"><i class="fa-solid fa-check"></i></span><div><div class="stat-value">@passed</div><div class="stat-label">Passed</div></div></div></div>
+    <div class="col-sm-4"><div class="stat-card"><span class="stat-icon tone-amber"><i class="fa-solid fa-percent"></i></span><div><div class="stat-value">@(attempts.Any() ? (int)attempts.Average(a => a.Percent) : 0)%</div><div class="stat-label">Average score</div></div></div></div>
+</div>
+
+<div class="card-lms">
+    <div class="card-lms-body">
+        <div class="table-responsive">
+            <table class="table datatable">
+                <thead><tr><th>Student</th><th>Score</th><th>Result</th><th>Time taken</th><th>Submitted</th></tr></thead>
+                <tbody>
+                    @foreach (var a in attempts)
+                    {
+                        var taken = a.SubmittedAt!.Value - a.StartedAt;
+                        <tr>
+                            <td>@a.Student.Name <small class="text-muted">@a.Student.StudentID</small></td>
+                            <td data-order="@a.Percent">@a.Score.ToString("0.##") / @a.TotalMarks.ToString("0.##") <small class="text-muted">(@a.Percent%)</small></td>
+                            <td>@if (a.Passed) { <span class="badge bg-success">Passed</span> } else { <span class="badge bg-danger">Failed</span> }</td>
+                            <td data-order="@taken.TotalSeconds">@((int)taken.TotalMinutes)m @taken.Seconds s</td>
+                            <td class="text-nowrap" data-order="@a.SubmittedAt.Value.Ticks">@a.SubmittedAt.Value.ToString("dd MMM yyyy, h:mm tt")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,60 +1,59 @@
-﻿@model PowerSoft_IT.Models.User
-<div id="login">
-	<form id="RegisterFrm" method="post" class="show" asp-action="SignUp" asp-controller="Home" enctype="multipart/form-data">
-		<div>
-			<a href="/" class="backToHome shadow"><i class="fa-solid fa-arrow-left"></i></a>
-			<h1>Register</h1>
-			<div class="input-group mb-4 mt-4">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-secret text-primary"></i></span>
-				<input type="text" class="form-control" required placeholder="Name" aria-label="Name" name="FullName" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-4 mt-4">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone text-primary"></i></span>
-				<input type="tel" class="form-control" required placeholder="MobileNo" aria-label="MobileNo" name="MobileNo" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-4 mt-4">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-envelope text-primary"></i></span>
-				<input type="email" class="form-control" required placeholder="Email" aria-label="Email" name="Email" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key text-primary"></i></span>
-				<input type="password" id="Password" name="Password" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-eye-slash closeEye closeEye1"></i><i class="fa-solid fa-eye openEye openEye1"></i></span>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key text-primary"></i></span>
-				<input type="password" id="ConfirmPassword" name="ConfirmPassword" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-				<span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-eye-slash closeEye closeEye2"></i><i class="fa-solid fa-eye openEye openEye2"></i></span>
-			</div>
-			<input type="submit" value="Register" class="btn btn-outline-primary rounded-5 btn-light registerBtn"><br />
-			<input type="checkbox" />Remember me<br />
-			<a href="/login">I have a account</a>
-		</div>
-	</form>
+@model EduLearn.Models.ViewModels.RegisterViewModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "Create account";
+    ViewData["AuthHeadline"] = "Start learning today — it only takes a minute.";
+}
+<div class="auth-top">
+    <a href="/"><i class="bi bi-arrow-left me-1"></i>Back to website</a>
+    <span class="text-muted-ps">Already registered? <a asp-controller="Login" asp-action="Index" asp-route-returnUrl="@Model.ReturnUrl">Log in</a></span>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-
-	/*======================= Password Hide Show =======================*/
-	$(".openEye").hide();
-	$(".closeEye").click(() => {
-		$("#Password").attr('type', 'text');
-		$(".closeEye").hide();
-		$(".openEye").show();
-	});
-
-	$(".openEye1").click(() => {
-		$("#Password").attr('type', 'password');
-		$(".closeEye1").show();
-		$(".openEye1").hide();
-	});
-
-	$(".openEye2").click(() => {
-		$("#ConfirmPassword").attr('type', 'password');
-		$(".closeEye2").show();
-		$(".openEye2").hide();
-	});
-
-	$(".social-links-container").hide();
-</script>
+<div class="auth-card">
+    <h1>Create your account</h1>
+    <p class="sub">Free student account — enroll in courses, track progress and earn certificates.</p>
+    <div class="panel">
+        <form id="RegisterFrm" method="post" asp-controller="Home" asp-action="SignUp" class="ps-form">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="FullName">Full name</label>
+                <div class="input-icon"><i class="bi bi-person"></i><input asp-for="FullName" class="form-control" required autocomplete="name" placeholder="Your full name" /></div>
+                <span asp-validation-for="FullName"></span>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-sm-6">
+                    <label class="form-label" asp-for="MobileNo">Mobile</label>
+                    <div class="input-icon"><i class="bi bi-telephone"></i><input asp-for="MobileNo" type="tel" class="form-control" required autocomplete="tel" placeholder="01XXXXXXXXX" /></div>
+                    <span asp-validation-for="MobileNo"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label" asp-for="Email">Email</label>
+                    <div class="input-icon"><i class="bi bi-envelope"></i><input asp-for="Email" type="email" class="form-control" required autocomplete="email" placeholder="you@example.com" /></div>
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                    <label class="form-label" asp-for="Password">Password</label>
+                    <div class="input-icon">
+                        <i class="bi bi-lock"></i>
+                        <input asp-for="Password" type="password" class="form-control" required minlength="6" autocomplete="new-password" placeholder="Min. 6 characters" />
+                        <button type="button" class="toggle-pw" data-target="#Password" aria-label="Show password"><i class="bi bi-eye"></i></button>
+                    </div>
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label" asp-for="ConfirmPassword">Confirm password</label>
+                    <div class="input-icon">
+                        <i class="bi bi-lock"></i>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" required autocomplete="new-password" placeholder="Repeat password" />
+                        <button type="button" class="toggle-pw" data-target="#ConfirmPassword" aria-label="Show password"><i class="bi bi-eye"></i></button>
+                    </div>
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn-ps w-100 btn-lg">Create account <i class="bi bi-arrow-right"></i></button>
+            <p class="small text-muted-ps text-center mt-3 mb-0">By creating an account you agree to our <a href="/Home/Privacy">privacy policy</a>.</p>
+        </form>
+    </div>
+</div>

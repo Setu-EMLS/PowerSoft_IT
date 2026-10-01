@@ -1,4 +1,4 @@
-namespace PowerSoft_IT.Models
+namespace EduLearn.Models
 {
     public class ErrorViewModel
     {

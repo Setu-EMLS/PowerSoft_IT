@@ -1,0 +1,99 @@
+@model Course
+@{
+    ViewData["Title"] = "Curriculum · " + Model.Title;
+    var totalLessons = Model.Sections.Sum(s => s.Lessons.Count);
+    var totalMinutes = Model.Sections.SelectMany(s => s.Lessons).Sum(l => l.DurationMinutes ?? 0);
+}
+<div class="card-lms mb-4">
+    <div class="card-lms-body d-flex flex-wrap gap-3 align-items-center">
+        <img src="@UiHelpers.CourseImage(Model.ThumbnailPath)" alt="" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:10px" />
+        <div class="flex-grow-1">
+            <h4 class="mb-1">@Model.Title</h4>
+            <div class="text-muted small">
+                @Model.Coursecategory?.Title · Teacher: @(Model.Teacher?.Name ?? "not assigned") ·
+                @Model.Sections.Count sections · @totalLessons lessons @(totalMinutes > 0 ? $"· {totalMinutes / 60}h {totalMinutes % 60}m" : "")
+            </div>
+            <div class="mt-1">
+                @if (Model.IsPublished) { <span class="badge bg-success">Published</span> } else { <span class="badge bg-secondary">Draft — not visible on the website</span> }
+            </div>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Admin/Course/Edit/@Model.Id" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-pen me-1"></i>Course settings</a>
+            }
+            <a href="/Courses/Details/@Model.Id" target="_blank" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Public page</a>
+            <a href="/Teacher/Courses/Students/@Model.Id" class="btn btn-sm btn-outline-brand"><i class="fa-solid fa-users me-1"></i>Students</a>
+        </div>
+    </div>
+</div>
+
+@foreach (var sec in Model.Sections)
+{
+    <div class="section-block">
+        <div class="section-block-head">
+            <i class="fa-solid fa-layer-group text-brand"></i>
+            <h6>@sec.Title <small class="text-muted fw-normal">(@sec.Lessons.Count lessons)</small></h6>
+            <form asp-action="MoveSection" asp-route-id="@sec.Id" asp-route-direction="-1" method="post" class="inline-form">
+                <button class="btn btn-sm btn-light" title="Move up"><i class="fa-solid fa-arrow-up"></i></button>
+            </form>
+            <form asp-action="MoveSection" asp-route-id="@sec.Id" asp-route-direction="1" method="post" class="inline-form">
+                <button class="btn btn-sm btn-light" title="Move down"><i class="fa-solid fa-arrow-down"></i></button>
+            </form>
+            <button class="btn btn-sm btn-light" data-bs-toggle="collapse" data-bs-target="#rename-@sec.Id" title="Rename"><i class="fa-solid fa-pen"></i></button>
+            <form asp-action="DeleteSection" asp-route-id="@sec.Id" method="post" class="inline-form" data-confirm="Delete section '@sec.Title' and all its lessons?">
+                <button class="btn btn-sm btn-light text-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+            </form>
+        </div>
+        <form asp-action="RenameSection" asp-route-id="@sec.Id" method="post" class="collapse p-3 border-bottom" id="rename-@sec.Id">
+            <div class="input-group">
+                <input name="title" value="@sec.Title" class="form-control" required maxlength="200" />
+                <button class="btn btn-brand">Rename</button>
+            </div>
+        </form>
+
+        @foreach (var lesson in sec.Lessons)
+        {
+            <div class="lesson-row">
+                <i class="fa-solid @UiHelpers.LessonIcon(lesson.Type) text-brand"></i>
+                <div class="lesson-title">
+                    <div class="fw-semibold text-truncate">@lesson.Title</div>
+                    <small class="text-muted">
+                        @lesson.Type
+                        @if (lesson.DurationMinutes > 0) { <text>· @lesson.DurationMinutes min</text> }
+                        @if (lesson.AttachmentPath != null) { <text>· <i class="fa-solid fa-paperclip"></i> file</text> }
+                        @if (lesson.IsPreview) { <span class="badge bg-info text-dark ms-1">Free preview</span> }
+                    </small>
+                </div>
+                <form asp-action="MoveLesson" asp-route-id="@lesson.Id" asp-route-direction="-1" method="post" class="inline-form">
+                    <button class="btn btn-sm btn-light" title="Move up"><i class="fa-solid fa-arrow-up"></i></button>
+                </form>
+                <form asp-action="MoveLesson" asp-route-id="@lesson.Id" asp-route-direction="1" method="post" class="inline-form">
+                    <button class="btn btn-sm btn-light" title="Move down"><i class="fa-solid fa-arrow-down"></i></button>
+                </form>
+                <a asp-action="EditLesson" asp-route-id="@lesson.Id" class="btn btn-sm btn-outline-primary" title="Edit"><i class="fa-solid fa-pen"></i></a>
+                <form asp-action="DeleteLesson" asp-route-id="@lesson.Id" method="post" class="inline-form" data-confirm="Delete lesson '@lesson.Title'?">
+                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                </form>
+            </div>
+        }
+        <div class="p-3">
+            <a asp-action="CreateLesson" asp-route-sectionId="@sec.Id" class="btn btn-sm btn-outline-brand"><i class="fa-solid fa-plus me-1"></i>Add lesson</a>
+        </div>
+    </div>
+}
+
+@if (!Model.Sections.Any())
+{
+    <div class="card-lms mb-3"><div class="empty-state"><i class="fa-solid fa-layer-group"></i>Start by adding the first section, e.g. "Introduction".</div></div>
+}
+
+<div class="card-lms">
+    <div class="card-lms-body">
+        <form asp-action="AddSection" method="post" class="d-flex flex-wrap gap-2">
+            <input type="hidden" name="courseId" value="@Model.Id" />
+            <input name="title" class="form-control flex-grow-1" style="max-width:480px" placeholder="New section title, e.g. Week 1: Getting started" required maxlength="200" />
+            <button type="submit" class="btn btn-brand"><i class="fa-solid fa-plus me-1"></i>Add section</button>
+        </form>
+    </div>
+</div>

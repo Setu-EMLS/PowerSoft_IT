@@ -1,0 +1,19 @@
+@model QuizQuestion
+@{
+    ViewData["Title"] = "Edit Question";
+    Model.Options = Model.Options.OrderBy(o => o.Id).ToList();
+}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card-lms">
+            <div class="card-lms-header"><h5>Edit question · @Model.Quiz.Title</h5></div>
+            <div class="card-lms-body">
+                <form asp-action="EditQuestion" asp-route-id="@Model.Id" method="post">
+                    <partial name="_QuestionEditor" model="Model" />
+                    <button type="submit" class="btn btn-brand px-4">Save question</button>
+                    <a asp-action="Questions" asp-route-id="@Model.QuizId" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

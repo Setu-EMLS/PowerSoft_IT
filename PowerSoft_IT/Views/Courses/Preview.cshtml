@@ -1,0 +1,44 @@
+@model Lesson
+@{
+    ViewData["Title"] = Model.Title;
+    var embed = Model.Type == LessonType.Video ? UiHelpers.ToEmbedUrl(Model.Url) : null;
+    var direct = Model.Type == LessonType.Video
+        ? (UiHelpers.IsDirectVideo(Model.Url) ? UiHelpers.SafeUrl(Model.Url) : UiHelpers.IsDirectVideo(Model.AttachmentPath) ? Model.AttachmentPath : null)
+        : null;
+    var link = UiHelpers.SafeUrl(Model.Url);
+    var course = Model.Section.Course;
+}
+<partial name="_PageHero" model="@(new PageHero(Model.Title, "Free preview lesson from " + course.Title, null, ("Courses", "/Courses"), (course.Title, "/Courses/Details/" + course.Id), ("Preview", null)))" />
+
+<section class="ps-section">
+    <div class="container" style="max-width:960px">
+        @if (embed != null)
+        {
+            <div class="player-wrap ratio ratio-16x9 mb-4">
+                <iframe src="@embed" title="@Model.Title" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        }
+        else if (direct != null)
+        {
+            <div class="player-wrap mb-4"><video src="@direct" controls class="w-100 d-block"></video></div>
+        }
+
+        <div class="ps-card">
+            <span class="badge-soft ic-blue mb-3"><i class="fa-solid @UiHelpers.LessonIcon(Model.Type)"></i>@Model.Type lesson @(Model.DurationMinutes > 0 ? "· " + Model.DurationMinutes + " min" : "")</span>
+            <h2 class="h4">@Model.Title</h2>
+            @if (Model.Type == LessonType.Link && link != null)
+            {
+                <a href="@link" target="_blank" rel="noopener" class="btn-ps btn-sm my-2">Open resource <i class="bi bi-box-arrow-up-right"></i></a>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Content))
+            {
+                <div class="prose mt-2" style="white-space:pre-wrap">@Model.Content</div>
+            }
+        </div>
+
+        <div class="text-center mt-5">
+            <p class="text-muted-ps">Enjoyed the preview? Get the full course with live classes, assignments and a certificate.</p>
+            <a href="/Courses/Details/@course.Id" class="btn-ps btn-lg">View full course <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</section>

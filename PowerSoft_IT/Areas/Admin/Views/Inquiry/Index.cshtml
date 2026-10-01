@@ -1,0 +1,70 @@
+@model List<Inquiry>
+@{
+    ViewData["Title"] = "Website Inquiries";
+    var type = ViewBag.Type as InquiryType?;
+    var counts = (Dictionary<InquiryType, (int New, int Total)>)ViewBag.Counts;
+    string Badge(InquiryType t) => t switch
+    {
+        InquiryType.Seminar => "bg-warning text-dark",
+        InquiryType.Newsletter => "bg-info text-dark",
+        InquiryType.Feedback => "bg-success",
+        _ => "bg-primary"
+    };
+}
+<div class="page-head">
+    <div>
+        <h2>Website inquiries</h2>
+        <p>Messages from the contact form, free seminar registrations and newsletter subscribers.</p>
+    </div>
+</div>
+
+<ul class="nav nav-pills mb-3 gap-1">
+    <li class="nav-item"><a class="nav-link @(type == null ? "active" : "")" href="/Admin/Inquiry">All <span class="badge bg-light text-dark ms-1">@counts.Values.Sum(c => c.Total)</span></a></li>
+    @foreach (var t in Enum.GetValues<InquiryType>())
+    {
+        var c = counts.GetValueOrDefault(t);
+        <li class="nav-item">
+            <a class="nav-link @(type == t ? "active" : "")" href="/Admin/Inquiry?type=@t">
+                @t <span class="badge @(c.New > 0 ? "bg-warning text-dark" : "bg-light text-dark") ms-1">@(c.New > 0 ? c.New + " new" : c.Total.ToString())</span>
+            </a>
+        </li>
+    }
+</ul>
+
+<div class="card-lms">
+    <div class="card-lms-body">
+        <div class="table-responsive">
+            <table class="table datatable">
+                <thead><tr><th>Received</th><th>Type</th><th>From</th><th>Details</th><th>Status</th><th class="no-sort text-end">Actions</th></tr></thead>
+                <tbody>
+                    @foreach (var i in Model)
+                    {
+                        <tr class="@(i.IsHandled ? "text-muted" : "")">
+                            <td class="text-nowrap" data-order="@i.CreatedAt.Ticks">@i.CreatedAt.ToString("dd MMM yyyy")<small class="d-block text-muted">@i.CreatedAt.ToString("h:mm tt")</small></td>
+                            <td><span class="badge @Badge(i.Type)">@i.Type</span></td>
+                            <td>
+                                <div class="fw-semibold">@(i.Name ?? "—")</div>
+                                <a href="mailto:@i.Email" class="small d-block">@i.Email</a>
+                                @if (!string.IsNullOrEmpty(i.Phone)) { <a href="tel:@i.Phone" class="small">@i.Phone</a> }
+                            </td>
+                            <td style="max-width:420px">
+                                @if (!string.IsNullOrEmpty(i.Course)) { <div><span class="text-muted small">Course:</span> @i.Course</div> }
+                                @if (!string.IsNullOrEmpty(i.Subject) && i.Type == InquiryType.Contact) { <div class="fw-semibold">@i.Subject</div> }
+                                @if (!string.IsNullOrEmpty(i.Message)) { <div class="small player-article">@i.Message</div> }
+                            </td>
+                            <td>@if (i.IsHandled) { <span class="badge bg-light text-muted border">Handled</span> } else { <span class="badge bg-warning text-dark">New</span> }</td>
+                            <td class="text-end text-nowrap">
+                                <form asp-action="ToggleHandled" asp-route-id="@i.Id" asp-route-returnType="@type" method="post" class="inline-form">
+                                    <button class="btn btn-sm @(i.IsHandled ? "btn-outline-secondary" : "btn-success")" title="@(i.IsHandled ? "Mark as new" : "Mark as handled")"><i class="fa-solid @(i.IsHandled ? "fa-rotate-left" : "fa-check")"></i></button>
+                                </form>
+                                <form asp-action="Delete" asp-route-id="@i.Id" asp-route-returnType="@type" method="post" class="inline-form" data-confirm="Delete this message?">
+                                    <button class="btn btn-sm btn-outline-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

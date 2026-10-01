@@ -1,3 +1,4 @@
-﻿@{
-    Layout = "~/Areas/Teacher/Views/Shared/_Layout.cshtml";
+@{
+    // Admins can manage any course's content from the Teacher area; keep them in the admin chrome
+    Layout = User.IsInRole("Admin") ? "~/Areas/Admin/Views/Shared/_Layout.cshtml" : "~/Areas/Teacher/Views/Shared/_Layout.cshtml";
 }

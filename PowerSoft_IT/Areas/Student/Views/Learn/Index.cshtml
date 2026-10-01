@@ -1,0 +1,127 @@
+@model LearnViewModel
+@{
+    ViewData["Title"] = Model.Course.Title;
+    var lesson = Model.Current;
+    var isDone = lesson != null && Model.CompletedLessonIds.Contains(lesson.Id);
+    var embed = lesson?.Type == LessonType.Video ? UiHelpers.ToEmbedUrl(lesson.Url) : null;
+    var directVideo = lesson?.Type == LessonType.Video
+        ? (UiHelpers.IsDirectVideo(lesson.Url) ? UiHelpers.SafeUrl(lesson.Url) : UiHelpers.IsDirectVideo(lesson.AttachmentPath) ? lesson.AttachmentPath : null)
+        : null;
+    var safeLink = UiHelpers.SafeUrl(lesson?.Url);
+}
+<div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+    <a href="/Student/Courses" class="btn btn-sm btn-light"><i class="fa-solid fa-arrow-left me-1"></i>My courses</a>
+    <div class="flex-grow-1" style="min-width:200px;max-width:420px">
+        <div class="d-flex justify-content-between small text-muted mb-1">
+            <span>Your progress</span><span>@Model.Progress.Completed / @Model.Progress.Total lessons · @Model.Progress.Percent%</span>
+        </div>
+        <div class="progress"><div class="progress-bar" style="width:@Model.Progress.Percent%"></div></div>
+    </div>
+    @if (Model.Enrollment.Status == EnrollmentStatus.Completed)
+    {
+        <a href="/Student/Certificates/View/@Model.Enrollment.Id" class="btn btn-sm btn-success"><i class="fa-solid fa-award me-1"></i>View certificate</a>
+    }
+</div>
+
+@if (lesson == null)
+{
+    <div class="card-lms"><div class="empty-state"><i class="fa-solid fa-person-digging"></i>The teacher hasn't added any lessons yet. Check back soon!</div></div>
+}
+else
+{
+    <div class="player-layout">
+        <div>
+            @if (embed != null)
+            {
+                <div class="player-media ratio ratio-16x9 mb-3">
+                    <iframe src="@embed" title="@lesson.Title" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            }
+            else if (directVideo != null)
+            {
+                <div class="player-media mb-3">
+                    <video src="@directVideo" controls controlsList="nodownload" class="w-100 d-block"></video>
+                </div>
+            }
+
+            <div class="card-lms mb-3">
+                <div class="card-lms-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                        <div>
+                            <small class="text-muted"><i class="fa-solid @UiHelpers.LessonIcon(lesson.Type) me-1"></i>@lesson.Type @(lesson.DurationMinutes > 0 ? "· " + lesson.DurationMinutes + " min" : "")</small>
+                            <h4 class="mb-0">@lesson.Title</h4>
+                        </div>
+                        @if (isDone) { <span class="badge bg-success fs-6"><i class="fa-solid fa-check me-1"></i>Completed</span> }
+                    </div>
+
+                    @if (lesson.Type == LessonType.Video && embed == null && directVideo == null)
+                    {
+                        <div class="alert alert-light border">
+                            This video can't be embedded here.
+                            @if (safeLink != null) { <a href="@safeLink" target="_blank" rel="noopener" class="alert-link">Watch it in a new tab</a> }
+                        </div>
+                    }
+                    @if (lesson.Type == LessonType.Link && safeLink != null)
+                    {
+                        <a href="@safeLink" target="_blank" rel="noopener" class="btn btn-brand mb-3"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Open resource</a>
+                    }
+                    @if (!string.IsNullOrEmpty(lesson.AttachmentPath) && lesson.AttachmentPath != directVideo)
+                    {
+                        <a href="@lesson.AttachmentPath" target="_blank" class="btn btn-outline-brand mb-3"><i class="fa-solid fa-file-arrow-down me-1"></i>Download lesson file</a>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(lesson.Content))
+                    {
+                        <div class="player-article mt-2">@lesson.Content</div>
+                    }
+                </div>
+                <div class="card-lms-body border-top d-flex flex-wrap justify-content-between gap-2">
+                    @if (Model.Previous != null)
+                    {
+                        <a href="/Student/Learn/Index/@Model.Course.Id?lessonId=@Model.Previous.Id" class="btn btn-light"><i class="fa-solid fa-chevron-left me-1"></i>Previous</a>
+                    }
+                    else { <span></span> }
+                    <div class="d-flex gap-2">
+                        @if (!isDone)
+                        {
+                            <form asp-action="Complete" method="post" class="inline-form">
+                                <input type="hidden" name="lessonId" value="@lesson.Id" />
+                                <button type="submit" class="btn btn-brand"><i class="fa-solid fa-check me-1"></i>Mark as complete@(Model.Next != null ? " & continue" : "")</button>
+                            </form>
+                        }
+                        @if (Model.Next != null)
+                        {
+                            <a href="/Student/Learn/Index/@Model.Course.Id?lessonId=@Model.Next.Id" class="btn @(isDone ? "btn-brand" : "btn-light")">Next<i class="fa-solid fa-chevron-right ms-1"></i></a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside>
+            <div class="card-lms curriculum-nav mb-3">
+                <div class="card-lms-header"><h6 class="text-truncate">@Model.Course.Title</h6></div>
+                @foreach (var sec in Model.Course.Sections)
+                {
+                    <div class="cn-section">@sec.Title</div>
+                    @foreach (var l in sec.Lessons)
+                    {
+                        var done = Model.CompletedLessonIds.Contains(l.Id);
+                        <a href="/Student/Learn/Index/@Model.Course.Id?lessonId=@l.Id" class="@(l.Id == lesson.Id ? "current" : "") @(done ? "done" : "")">
+                            <i class="fa-solid @(done ? "fa-circle-check" : "fa-circle") state"></i>
+                            <span class="flex-grow-1">@l.Title
+                                <small class="d-block text-muted"><i class="fa-solid @UiHelpers.LessonIcon(l.Type) me-1"></i>@l.Type @(l.DurationMinutes > 0 ? "· " + l.DurationMinutes + " min" : "")</small>
+                            </span>
+                        </a>
+                    }
+                }
+            </div>
+            <div class="card-lms">
+                <div class="card-lms-body d-grid gap-2">
+                    <a href="/Student/Quizzes?courseId=@Model.Course.Id" class="btn btn-outline-secondary btn-sm text-start"><i class="fa-solid fa-circle-question me-2"></i>Quizzes (@Model.QuizCount)</a>
+                    <a href="/Student/Assignments?courseId=@Model.Course.Id" class="btn btn-outline-secondary btn-sm text-start"><i class="fa-solid fa-list-check me-2"></i>Assignments (@Model.AssignmentCount)</a>
+                    <a href="/Student/Announcements" class="btn btn-outline-secondary btn-sm text-start"><i class="fa-solid fa-bullhorn me-2"></i>Announcements</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | EduLearn</title>
+    <meta name="theme-color" content="#0A1F4E" />
+    <link rel="icon" type="image/svg+xml" href="~/Images/logo/edulearn-icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/premium.css" asp-append-version="true" />
+</head>
+<body class="ps-body">
+    <div class="auth-shell">
+        <aside class="auth-brand">
+            <a href="/" aria-label="EduLearn home"><partial name="_Logo" model="@("light")" /></a>
+            <h2>@(ViewData["AuthHeadline"] ?? "Learn the skills that build careers.")</h2>
+            <ul class="benefits">
+                <li><i class="bi bi-camera-video"></i>Live classes and recorded lessons</li>
+                <li><i class="bi bi-graph-up-arrow"></i>Track your progress, grades and quizzes</li>
+                <li><i class="bi bi-patch-check"></i>Earn a certificate employers can verify</li>
+            </ul>
+            <div class="mini-quote">
+                “The instructors were supportive, and I built real-world projects that helped me land a job.”
+                <div class="mt-2"><strong>Rahim Hossain</strong> · Web Development Student</div>
+            </div>
+        </aside>
+        <main class="auth-main">
+            <a href="/" class="auth-mobile-logo" aria-label="EduLearn home"><partial name="_Logo" model="@("dark")" /></a>
+            @RenderBody()
+        </main>
+    </div>
+    <partial name="_Toasts" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/premium.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

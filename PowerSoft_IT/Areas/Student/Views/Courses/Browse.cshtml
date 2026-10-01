@@ -1,0 +1,67 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Browse Courses";
+    var categories = (List<CourseCategory>)ViewBag.Categories;
+    var myStatus = (Dictionary<int, EnrollmentStatus>)ViewBag.MyStatus;
+    int? categoryId = ViewBag.CategoryId;
+}
+<form method="get" class="card-lms mb-4">
+    <div class="card-lms-body d-flex flex-wrap gap-2">
+        <div class="input-group flex-grow-1" style="max-width:480px">
+            <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="search" name="q" value="@ViewBag.Q" class="form-control" placeholder="Search courses" />
+        </div>
+        <select name="categoryId" class="form-select" style="max-width:240px" onchange="this.form.submit()">
+            <option value="">All categories</option>
+            @foreach (var c in categories)
+            {
+                <option value="@c.Id" selected="@(categoryId == c.Id)">@c.Title</option>
+            }
+        </select>
+        <button class="btn btn-brand">Search</button>
+    </div>
+</form>
+
+<div class="row g-3">
+    @foreach (var c in Model)
+    {
+        var hasStatus = myStatus.TryGetValue(c.Id, out var status);
+        var lessons = c.Sections.Sum(s => s.Lessons.Count);
+        <div class="col-md-6 col-xl-4">
+            <div class="course-card">
+                <img src="@UiHelpers.CourseImage(c.ThumbnailPath)" alt="" />
+                <div class="course-card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-light text-dark border">@c.Coursecategory?.Title</span>
+                        <span class="fw-bold text-brand">@UiHelpers.Money(c.Price)</span>
+                    </div>
+                    <h5>@c.Title</h5>
+                    <p class="meta mb-0">@c.ShortDescription</p>
+                    <div class="meta">
+                        <i class="fa-solid fa-person-chalkboard me-1"></i>@(c.Teacher?.Name ?? "EduLearn")
+                        · @lessons lessons @(string.IsNullOrEmpty(c.Duration) ? "" : "· " + c.Duration)
+                    </div>
+                    <div class="mt-auto pt-2 d-flex gap-2">
+                        <a href="/Courses/Details/@c.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                        @if (hasStatus && (status == EnrollmentStatus.Active || status == EnrollmentStatus.Completed))
+                        {
+                            <a href="/Student/Learn/Index/@c.Id" class="btn btn-sm btn-brand flex-grow-1">Go to course</a>
+                        }
+                        else if (hasStatus && status == EnrollmentStatus.Pending)
+                        {
+                            <span class="btn btn-sm btn-warning disabled flex-grow-1">Waiting for approval</span>
+                        }
+                        else
+                        {
+                            <a href="/Student/Enroll/Index/@c.Id" class="btn btn-sm btn-brand flex-grow-1">Enroll now</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Model.Any())
+    {
+        <div class="col-12"><div class="card-lms"><div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i>No courses match your search.</div></div></div>
+    }
+</div>

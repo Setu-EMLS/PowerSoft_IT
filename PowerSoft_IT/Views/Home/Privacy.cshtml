@@ -1,6 +1,20 @@
-﻿@{
+@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<partial name="_PageHero" model="@(new PageHero("Privacy policy", "How EduLearn collects, uses and protects your information.", null, ("Privacy policy", null)))" />
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class="ps-section">
+    <div class="container" style="max-width:820px">
+        <div class="ps-card legal prose">
+            <p>This policy explains what information EduLearn collects when you use this website and our learning platform, and how we use it.</p>
+            <h2>Information we collect</h2>
+            <p>When you create an account, enroll in a course, register for a seminar or contact us, we collect the details you provide — such as your name, email address, phone number and payment reference numbers. While you learn, we record your course progress, assignment submissions and quiz results.</p>
+            <h2>How we use it</h2>
+            <p>We use your information to give you access to your courses, verify payments, track your progress, issue certificates, and contact you about your studies, seminars and new courses. We do not sell your personal information.</p>
+            <h2>Certificates</h2>
+            <p>Certificate numbers can be checked on our public verification page, which shows the learner's name, course and completion date.</p>
+            <h2>Your choices</h2>
+            <p>You can update your profile from your student dashboard at any time. To unsubscribe from updates or ask us to delete your data, <a href="/ContactUs?subject=Privacy%20request">contact us</a>.</p>
+        </div>
+    </div>
+</section>

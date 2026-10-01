@@ -1,0 +1,25 @@
+@{
+    var success = TempData["Success"] as string;
+    var error = TempData["Error"] as string;
+}
+@if (success != null || error != null)
+{
+    <div class="ps-toast-wrap" role="status" aria-live="polite">
+        @if (success != null)
+        {
+            <div class="ps-toast mb-2">
+                <i class="bi bi-check-circle-fill lead-ic"></i>
+                <div>@success</div>
+                <button type="button" class="btn-close" aria-label="Close" onclick="this.closest('.ps-toast').remove()"></button>
+            </div>
+        }
+        @if (error != null)
+        {
+            <div class="ps-toast error">
+                <i class="bi bi-exclamation-octagon-fill lead-ic"></i>
+                <div>@error</div>
+                <button type="button" class="btn-close" aria-label="Close" onclick="this.closest('.ps-toast').remove()"></button>
+            </div>
+        }
+    </div>
+}

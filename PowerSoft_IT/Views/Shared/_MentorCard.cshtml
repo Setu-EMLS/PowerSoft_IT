@@ -1,0 +1,22 @@
+@model TeacherEntity
+@{
+    var initials = string.Concat(Model.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(p => char.ToUpper(p[0])));
+    var courseCount = ViewData["CourseCount"] as int?;
+}
+<div class="mentor-card">
+    @if (!string.IsNullOrEmpty(Model.PhotoPath)) { <img src="@Model.PhotoPath" class="photo" alt="@Model.Name" /> }
+    else { <span class="photo initials">@initials</span> }
+    <h4>@Model.Name</h4>
+    <div class="role">@(Model.Designation ?? "Instructor")</div>
+    @if (!string.IsNullOrWhiteSpace(Model.Description))
+    {
+        <p>@(Model.Description.Length > 120 ? Model.Description[..120] + "…" : Model.Description)</p>
+    }
+    @if (Model.Courses.Any())
+    {
+        <div class="stats">
+            <span><strong>@Model.Courses.Count(c => c.IsPublished)</strong>Courses</span>
+            <span><strong>@Model.Courses.Where(c => c.IsPublished).Sum(c => c.Enrollments.Count(e => e.HasAccess))</strong>Students</span>
+        </div>
+    }
+</div>

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace PowerSoft_IT.Migrations
+namespace EduLearn.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration

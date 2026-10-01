@@ -1,0 +1,10 @@
+@model PersonFormViewModel
+@{
+    ViewData["Title"] = "Edit Teacher";
+    ViewData["ShowDesignation"] = true;
+}
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+    <partial name="_PersonForm" model="Model" view-data="ViewData" />
+    <button type="submit" class="btn btn-brand px-4">Save changes</button>
+    <a asp-action="Index" class="btn btn-light">Cancel</a>
+</form>

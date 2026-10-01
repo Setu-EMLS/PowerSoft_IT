@@ -1,9 +1,9 @@
-﻿using PowerSoft_IT.Models;
-using PowerSoft_IT.Services.Interfaces;
+﻿using EduLearn.Models;
+using EduLearn.Services.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PowerSoft_IT.Services.Implementations
+namespace EduLearn.Services.Implementations
 {
     public class UserService : IUserService
     {
@@ -22,10 +22,17 @@ namespace PowerSoft_IT.Services.Implementations
 
         public bool VerifyPassword(string enteredPassword, string storedPassword, string salt)
         {
-            // Implement your password hashing logic here
-            var hashedPassword = CreatePasswordHash(enteredPassword, salt);
-            return hashedPassword == storedPassword;
+            if (string.IsNullOrEmpty(storedPassword) || salt == null)
+                return false;
+
+            // Older accounts were hashed with salted SHA1; newer ones carry a "PBKDF2$" prefix
+            var format = storedPassword.StartsWith(Pbkdf2Prefix) ? "PBKDF2" : "SHA1";
+            var hashedPassword = CreatePasswordHash(enteredPassword, salt, format);
+            return CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(hashedPassword), Encoding.UTF8.GetBytes(storedPassword));
         }
+
+        private const string Pbkdf2Prefix = "PBKDF2$";
 
         public string CreateSaltKey(int size)
         {
@@ -37,8 +44,15 @@ namespace PowerSoft_IT.Services.Implementations
             return Convert.ToBase64String(buff);
         }
 
-        public string CreatePasswordHash(string password, string salt, string passwordFormat = "SHA1")
+        public string CreatePasswordHash(string password, string salt, string passwordFormat = "PBKDF2")
         {
+            if (passwordFormat == "PBKDF2")
+            {
+                var derived = Rfc2898DeriveBytes.Pbkdf2(
+                    Encoding.UTF8.GetBytes(password), Encoding.UTF8.GetBytes(salt), 100_000, HashAlgorithmName.SHA256, 32);
+                return Pbkdf2Prefix + Convert.ToBase64String(derived);
+            }
+
             if (String.IsNullOrEmpty(passwordFormat))
                 passwordFormat = "SHA1";
             string saltAndPassword = String.Concat(password, salt);

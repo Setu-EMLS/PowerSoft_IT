@@ -1,0 +1,61 @@
+@model List<Quiz>
+@{
+    ViewData["Title"] = "Quizzes";
+    var attempts = (Dictionary<int, List<QuizAttempt>>)ViewBag.Attempts;
+}
+<div class="page-head">
+    <div>
+        <h2>Quizzes</h2>
+        <p>Test yourself. Quizzes are marked instantly.</p>
+    </div>
+</div>
+
+<div class="row g-3">
+    @foreach (var q in Model)
+    {
+        var mine = attempts.GetValueOrDefault(q.Id) ?? new List<QuizAttempt>();
+        var done = mine.Where(a => a.SubmittedAt != null).ToList();
+        var best = done.OrderByDescending(a => a.Percent).FirstOrDefault();
+        var left = q.MaxAttempts == null ? (int?)null : Math.Max(0, q.MaxAttempts.Value - mine.Count);
+        var inProgress = mine.Any(a => a.SubmittedAt == null);
+        <div class="col-md-6 col-xl-4">
+            <div class="card-lms h-100 d-flex flex-column">
+                <div class="card-lms-body flex-grow-1">
+                    <small class="text-muted">@q.Course.Title</small>
+                    <h5 class="mb-2">@q.Title</h5>
+                    @if (!string.IsNullOrEmpty(q.Description)) { <p class="small text-muted">@q.Description</p> }
+                    <ul class="list-unstyled small mb-0">
+                        <li><i class="fa-solid fa-list-ol me-2 text-brand"></i>@q.Questions.Count questions · @q.Questions.Sum(x => x.Marks) marks</li>
+                        <li><i class="fa-regular fa-clock me-2 text-brand"></i>@(q.TimeLimitMinutes != null ? q.TimeLimitMinutes + " minutes" : "No time limit")</li>
+                        <li><i class="fa-solid fa-flag-checkered me-2 text-brand"></i>Pass mark @q.PassPercentage%</li>
+                        <li><i class="fa-solid fa-rotate me-2 text-brand"></i>@(left == null ? "Unlimited attempts" : left + " attempt(s) left")</li>
+                    </ul>
+                </div>
+                <div class="card-lms-body border-top d-flex align-items-center justify-content-between gap-2">
+                    @if (best != null)
+                    {
+                        <a href="/Student/Quizzes/Result/@best.Id" class="text-decoration-none">
+                            Best: <span class="badge @(best.Passed ? "bg-success" : "bg-danger")">@best.Percent%</span>
+                        </a>
+                    }
+                    else { <span class="text-muted small">Not attempted</span> }
+
+                    @if (inProgress || left != 0)
+                    {
+                        <form asp-action="Start" asp-route-id="@q.Id" method="post" class="inline-form" data-confirm="@(inProgress || q.TimeLimitMinutes == null ? "Start the quiz?" : $"You will have {q.TimeLimitMinutes} minutes. Start now?")">
+                            <button class="btn btn-sm btn-brand">@(inProgress ? "Resume" : done.Any() ? "Retake" : "Start quiz")</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No attempts left</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Model.Any())
+    {
+        <div class="col-12"><div class="card-lms"><div class="empty-state"><i class="fa-solid fa-circle-question"></i>No quizzes available yet.</div></div></div>
+    }
+</div>

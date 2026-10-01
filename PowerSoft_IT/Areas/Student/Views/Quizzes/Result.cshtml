@@ -1,0 +1,63 @@
+@model Quiz
+@{
+    ViewData["Title"] = "Result · " + Model.Title;
+    var attempt = (QuizAttempt)ViewBag.Attempt;
+    bool canRetry = ViewBag.CanRetry;
+    bool reveal = ViewBag.RevealCorrect;
+    var answers = attempt.Answers.ToDictionary(a => a.QuestionId);
+    var letters = "ABCDEFGHIJ";
+}
+<div class="row justify-content-center">
+    <div class="col-xl-8">
+        <div class="card-lms mb-3">
+            <div class="card-lms-body text-center py-4">
+                <i class="fa-solid @(attempt.Passed ? "fa-trophy text-warning" : "fa-face-meh text-muted") fa-3x mb-2"></i>
+                <h3 class="mb-1">@(attempt.Passed ? "Well done, you passed!" : "Not quite there yet")</h3>
+                <p class="text-muted mb-3">@Model.Title · @Model.Course.Title</p>
+                <div class="display-5 fw-bold @(attempt.Passed ? "text-success" : "text-danger")">@attempt.Percent%</div>
+                <div class="text-muted">@attempt.Score.ToString("0.##") of @attempt.TotalMarks.ToString("0.##") marks · pass mark @Model.PassPercentage%</div>
+                <div class="d-flex justify-content-center gap-2 mt-3">
+                    <a href="/Student/Quizzes" class="btn btn-light">All quizzes</a>
+                    @if (canRetry)
+                    {
+                        <form asp-action="Start" asp-route-id="@Model.Id" method="post" class="inline-form">
+                            <button class="btn btn-brand"><i class="fa-solid fa-rotate me-1"></i>Try again</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <h5 class="mb-3">Review</h5>
+        @{ var n = 0; }
+        @foreach (var q in Model.Questions)
+        {
+            n++;
+            answers.TryGetValue(q.Id, out var ans);
+            <div class="quiz-question">
+                <div class="d-flex justify-content-between gap-2 mb-1">
+                    <div class="fw-semibold">@n. <span class="player-article">@q.Text</span></div>
+                    @if (ans?.IsCorrect == true) { <span class="badge bg-success align-self-start">+@q.Marks</span> }
+                    else if (ans?.SelectedOptionId == null) { <span class="badge bg-secondary align-self-start">Skipped</span> }
+                    else { <span class="badge bg-danger align-self-start">0</span> }
+                </div>
+                @for (var i = 0; i < q.Options.Count; i++)
+                {
+                    var o = q.Options[i];
+                    var picked = ans?.SelectedOptionId == o.Id;
+                    var css = picked ? (o.IsCorrect ? "correct" : "wrong") : (reveal && o.IsCorrect ? "correct" : "");
+                    <div class="quiz-option @css">
+                        <strong>@letters[i % letters.Length].</strong> <span class="flex-grow-1">@o.Text</span>
+                        @if (picked) { <small class="text-muted">Your answer</small> }
+                        @if (picked && o.IsCorrect || (reveal && o.IsCorrect)) { <i class="fa-solid fa-check text-success"></i> }
+                        @if (picked && !o.IsCorrect) { <i class="fa-solid fa-xmark text-danger"></i> }
+                    </div>
+                }
+            </div>
+        }
+        @if (!reveal && canRetry)
+        {
+            <p class="text-muted small"><i class="fa-solid fa-circle-info me-1"></i>Correct answers for questions you got wrong are hidden while you still have attempts left.</p>
+        }
+    </div>
+</div>

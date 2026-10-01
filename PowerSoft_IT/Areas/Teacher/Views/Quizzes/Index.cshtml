@@ -1,0 +1,53 @@
+@model List<Quiz>
+@{
+    ViewData["Title"] = "Quizzes";
+    int? courseId = ViewBag.CourseId;
+}
+<div class="page-head">
+    <div>
+        <h2>Quizzes</h2>
+        <p>Multiple-choice quizzes are marked automatically when a student submits.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <form method="get" class="d-flex">
+            <select name="courseId" class="form-select" asp-items="ViewBag.Courses" onchange="this.form.submit()">
+                <option value="">All courses</option>
+            </select>
+        </form>
+        <a asp-action="Create" asp-route-courseId="@courseId" class="btn btn-brand text-nowrap"><i class="fa-solid fa-plus me-1"></i> New quiz</a>
+    </div>
+</div>
+
+<div class="card-lms">
+    <div class="card-lms-body">
+        <div class="table-responsive">
+            <table class="table datatable">
+                <thead><tr><th>Quiz</th><th>Course</th><th>Questions</th><th>Time limit</th><th>Attempts</th><th>Status</th><th class="no-sort text-end">Actions</th></tr></thead>
+                <tbody>
+                    @foreach (var q in Model)
+                    {
+                        var submitted = q.Attempts.Where(a => a.SubmittedAt != null).ToList();
+                        <tr>
+                            <td class="fw-semibold">@q.Title</td>
+                            <td>@q.Course.Title</td>
+                            <td>@q.Questions.Count <small class="text-muted">(@q.Questions.Sum(x => x.Marks) marks)</small></td>
+                            <td>@(q.TimeLimitMinutes != null ? q.TimeLimitMinutes + " min" : "None")</td>
+                            <td>
+                                @submitted.Count
+                                @if (submitted.Any()) { <small class="text-muted">· avg @((int)submitted.Average(a => a.Percent))%</small> }
+                            </td>
+                            <td>@if (q.IsPublished) { <span class="badge bg-success">Published</span> } else { <span class="badge bg-secondary">Draft</span> }</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Questions" asp-route-id="@q.Id" class="btn btn-sm btn-brand"><i class="fa-solid fa-list-ol me-1"></i>Questions</a>
+                                <a asp-action="Results" asp-route-id="@q.Id" class="btn btn-sm btn-outline-brand"><i class="fa-solid fa-square-poll-vertical"></i></a>
+                                <form asp-action="Delete" asp-route-id="@q.Id" method="post" class="inline-form" data-confirm="Delete quiz '@q.Title' and all attempts?">
+                                    <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

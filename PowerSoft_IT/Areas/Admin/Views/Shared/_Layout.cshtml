@@ -1,86 +1,29 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <!-- Favicon -->
-    <link rel="icon" href="~/images/logo/powersoft-logo.png" />
-    <link rel="apple-touch-icon" href="~/images/logo/powersoft-logo.png" />
-    @* Custom CSS Link *@
-    <link href="~/css/dashboard.css" rel="stylesheet" />
-	@* Data Table ref *@
-    <link href="~/css/datatables.css" rel="stylesheet" />
-	<link href="~/css/datatables.min.css" rel="stylesheet" />
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["PanelName"] = "Admin Panel";
+}
+@section Sidebar {
+    <a href="/Admin" class="@ViewContext.ActiveIf("Home", "Index")"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
 
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-md-2 sidebar">
-                <div class="text-center mb-4">
-                    <i class="fas fa-cogs fa-3x"></i>
-                    <h4 class="mt-2">Admin Panel</h4>
-                </div>
+    <div class="dash-nav-heading">Academics</div>
+    <a href="/Admin/CourseCategory" class="@ViewContext.ActiveIf("CourseCategory")"><i class="fa-solid fa-layer-group"></i> Categories</a>
+    <a href="/Admin/Course" class="@ViewContext.ActiveIf("Course")@ViewContext.ActiveIf("Curriculum")"><i class="fa-solid fa-book"></i> Courses</a>
+    <a href="/Admin/Enrollment" class="@ViewContext.ActiveIf("Enrollment")"><i class="fa-solid fa-user-check"></i> Enrollments</a>
+    <a href="/Teacher/Assignments" class="@ViewContext.ActiveIf("Assignments")"><i class="fa-solid fa-list-check"></i> Assignments</a>
+    <a href="/Teacher/Quizzes" class="@ViewContext.ActiveIf("Quizzes")"><i class="fa-solid fa-circle-question"></i> Quizzes</a>
+    <a href="/Teacher/LiveClasses" class="@ViewContext.ActiveIf("LiveClasses")"><i class="fa-solid fa-video"></i> Live Classes</a>
 
-                <!-- Dashboard -->
-                <a href="/admin/" class="d-block mb-2"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
-                <a href="#" class="d-block mb-2"><i class="fa-regular fa-circle-user"></i> Profile</a>
+    <div class="dash-nav-heading">People</div>
+    <a href="/Admin/Teacher" class="@ViewContext.ActiveIf("Teacher")"><i class="fa-solid fa-person-chalkboard"></i> Teachers</a>
+    <a href="/Admin/Student" class="@ViewContext.ActiveIf("Student")"><i class="fa-solid fa-graduation-cap"></i> Students</a>
+    <a href="/Admin/ManageUser" class="@ViewContext.ActiveIf("ManageUser")"><i class="fa-solid fa-user-shield"></i> Admin Users</a>
 
-                <!-- Manage Users -->
-                <a class="d-block mb-2" data-bs-toggle="collapse" href="#usersMenu" role="button" aria-expanded="false" aria-controls="usersMenu">
-                    <i class="fas fa-users me-2"></i>Manage Users <i class="fas fa-chevron-down float-end"></i>
-                </a>
-                <div class="collapse ps-4" id="usersMenu">
-                    <a href="@Url.Action("Index", "ManageUser", new { Area = "Admin" })" class="d-block"><i class="fa-solid fa-person-chalkboard"></i> Teacher</a>
-                    <a href="@Url.Action("Index", "ManageUser", new { Area = "Admin" })" class="d-block"><i class="fa-solid fa-graduation-cap"></i> Student</a>
-                </div>
-
-                <!-- Manage Courses -->
-                <a class="d-block mb-2" data-bs-toggle="collapse" href="#coursesMenu" role="button" aria-expanded="false" aria-controls="coursesMenu">
-                    <i class="fas fa-book me-2"></i>Manage Courses <i class="fas fa-chevron-down float-end"></i>
-                </a>
-                <div class="collapse ps-4" id="coursesMenu">
-                    <a href="@Url.Action("Index", "CourseCategory", new { Area = "Admin" })" class="d-block"><i class="fa-solid fa-layer-group"></i>CourseCategory</a>
-                    <a href="@Url.Action("Index", "Course", new { Area = "Admin" })" class="d-block"><i class="fa-solid fa-list"></i> Course List</a>
-                </div>
-
-                <!-- Reports -->
-                <a class="d-block mb-2" data-bs-toggle="collapse" href="#reportsMenu" role="button" aria-expanded="false" aria-controls="reportsMenu">
-                    <i class="fas fa-file-alt me-2"></i>Reports <i class="fas fa-chevron-down float-end"></i>
-                </a>
-                <div class="collapse ps-4" id="reportsMenu">
-                    <a href="#" class="d-block"><i class="fa-solid fa-map-pin"></i> Notice</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-people-group"></i> Batch</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-table-cells"></i> Routine</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-square-poll-vertical"></i> Result</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-person-walking-arrow-right"></i> Leave</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-bars-progress"></i>TeacherProgress</a>
-                    <a href="#" class="d-block"><i class="fa-solid fa-bars-progress"></i>StudentProgress</a>
-                </div>
-
-                <!-- Settings -->
-                <a href="#" class="d-block mb-2"><i class="fas fa-sliders-h me-2"></i> Settings</a>
-
-                <!-- Logout -->
-                <a href="/home/Logout" class="d-block mb-2"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
-        </nav>
-
-        <!-- Main Content -->
-            @RenderBody()
-    </div>
-</div>
-@*=== dataTable Src ===*@
-@*<script src="~/js/datatable/datatables.js"></script>
-<script src="~/js/datatable/datatables.min.js"></script> *@
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-  
-</script>
-</body>
-</html>
+    <div class="dash-nav-heading">Office</div>
+    <a href="/Admin/Inquiry" class="@ViewContext.ActiveIf("Inquiry")"><i class="fa-solid fa-envelope-open-text"></i> Inquiries</a>
+    <a href="/Admin/Announcement" class="@ViewContext.ActiveIf("Announcement")"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+    <a href="/Admin/PaymentMethod" class="@ViewContext.ActiveIf("PaymentMethod")"><i class="fa-solid fa-wallet"></i> Payment Methods</a>
+    <a href="/Admin/Report" class="@ViewContext.ActiveIf("Report")"><i class="fa-solid fa-chart-column"></i> Reports</a>
+}
+@section Styles { @RenderSection("Styles", required: false) }
+@section Scripts { @RenderSection("Scripts", required: false) }
+@RenderBody()

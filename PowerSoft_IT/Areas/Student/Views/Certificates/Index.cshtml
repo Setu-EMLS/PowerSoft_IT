@@ -1,0 +1,31 @@
+@model List<Enrollment>
+@{
+    ViewData["Title"] = "Certificates";
+}
+<div class="page-head">
+    <div>
+        <h2>Certificates</h2>
+        <p>Finish every lesson in a course to earn its certificate.</p>
+    </div>
+</div>
+<div class="row g-3">
+    @foreach (var e in Model)
+    {
+        <div class="col-md-6 col-xl-4">
+            <div class="card-lms h-100">
+                <div class="card-lms-body d-flex gap-3 align-items-center">
+                    <span class="stat-icon tone-violet"><i class="fa-solid fa-award"></i></span>
+                    <div class="flex-grow-1 min-w-0">
+                        <div class="fw-semibold text-truncate">@e.Course.Title</div>
+                        <small class="text-muted">Completed @e.CompletedAt?.ToString("dd MMM yyyy") · <code>@e.CertificateNo</code></small>
+                    </div>
+                    <a href="/Student/Certificates/View/@e.Id" class="btn btn-sm btn-brand">Open</a>
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Model.Any())
+    {
+        <div class="col-12"><div class="card-lms"><div class="empty-state"><i class="fa-solid fa-award"></i>No certificates yet — keep going!</div></div></div>
+    }
+</div>

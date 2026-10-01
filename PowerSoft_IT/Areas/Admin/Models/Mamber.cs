@@ -1,4 +1,4 @@
-﻿namespace PowerSoft_IT.Areas.Admin.Models
+﻿namespace EduLearn.Areas.Admin.Models
 {
 	public class TeamTrainers
 	{

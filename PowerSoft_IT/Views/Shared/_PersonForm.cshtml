@@ -1,0 +1,95 @@
+@model PersonFormViewModel
+@{
+    var isNew = Model.Id == 0;
+    var showDesignation = ViewData["ShowDesignation"] as bool? ?? false;
+    var showFamily = ViewData["ShowFamily"] as bool? ?? true;
+    var showPassword = ViewData["ShowPassword"] as bool? ?? true;
+    var emailReadonly = ViewData["EmailReadonly"] as bool? ?? false;
+}
+<div asp-validation-summary="ModelOnly" class="mb-3"></div>
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="card-lms mb-3">
+            <div class="card-lms-header"><h6>Account</h6>@if (!string.IsNullOrEmpty(Model.Code)) { <span class="badge bg-light text-dark border">ID: @Model.Code</span> }</div>
+            <div class="card-lms-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label">Full name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email (login)</label>
+                        <input asp-for="Email" class="form-control" readonly="@emailReadonly" />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Contact" class="form-label"></label>
+                        <input asp-for="Contact" class="form-control" />
+                        <span asp-validation-for="Contact"></span>
+                    </div>
+                    @if (showDesignation)
+                    {
+                        <div class="col-md-6">
+                            <label asp-for="Designation" class="form-label"></label>
+                            <input asp-for="Designation" class="form-control" placeholder="e.g. Senior Instructor" />
+                        </div>
+                    }
+                    @if (showPassword)
+                    {
+                        <div class="col-md-6">
+                            <label asp-for="Password" class="form-label">@(isNew ? "Password" : "New password")</label>
+                            <input asp-for="Password" class="form-control" autocomplete="new-password" placeholder="@(isNew ? "At least 6 characters" : "Leave blank to keep current")" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-lms mb-3">
+            <div class="card-lms-header"><h6>Profile</h6></div>
+            <div class="card-lms-body">
+                <div class="row g-3">
+                    @if (showFamily)
+                    {
+                        <div class="col-md-6">
+                            <label asp-for="FatherName" class="form-label"></label>
+                            <input asp-for="FatherName" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="MotherName" class="form-label"></label>
+                            <input asp-for="MotherName" class="form-control" />
+                        </div>
+                    }
+                    <div class="col-md-6">
+                        <label asp-for="DateOfBirth" class="form-label"></label>
+                        <input asp-for="DateOfBirth" class="form-control" type="date" />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card-lms mb-3">
+            <div class="card-lms-header"><h6>Photo</h6></div>
+            <div class="card-lms-body text-center">
+                <img src="@UiHelpers.Avatar(Model.PhotoPath)" class="avatar-lg mb-3" alt="" id="photoPreview" />
+                <input asp-for="Photo" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="Photo"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('Photo')?.addEventListener('change', function () {
+        if (this.files && this.files[0]) document.getElementById('photoPreview').src = URL.createObjectURL(this.files[0]);
+    });
+</script>

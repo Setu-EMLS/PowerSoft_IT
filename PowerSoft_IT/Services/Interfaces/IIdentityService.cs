@@ -1,6 +1,6 @@
-﻿using PowerSoft_IT.Models;
+﻿using EduLearn.Models;
 
-namespace PowerSoft_IT.Services.Interfaces
+namespace EduLearn.Services.Interfaces
 {
     public interface IIdentityService
     {

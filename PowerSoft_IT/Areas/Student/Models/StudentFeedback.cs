@@ -1,4 +1,4 @@
-﻿namespace PowerSoft_IT.Areas.Student.Models
+﻿namespace EduLearn.Areas.Student.Models
 {
 	public class StudentFeedback
 	{

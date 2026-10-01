@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PowerSoft_IT.Controllers
+namespace EduLearn.Controllers
 {
     public class ProductDetailsController : Controller
     {

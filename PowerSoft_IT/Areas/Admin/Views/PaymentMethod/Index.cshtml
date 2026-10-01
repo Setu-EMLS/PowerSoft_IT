@@ -1,0 +1,83 @@
+@model List<PaymentGetway>
+@{
+    ViewData["Title"] = "Payment Methods";
+}
+<div class="page-head">
+    <div>
+        <h2>Payment methods</h2>
+        <p>Students see these numbers when they enroll in a paid course, then submit their transaction ID for you to verify.</p>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-8">
+        @foreach (var g in Model)
+        {
+            <div class="card-lms mb-3">
+                <div class="card-lms-header">
+                    <h5><i class="fa-solid fa-wallet me-2 text-brand"></i>@g.Name</h5>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#edit-@g.Id"><i class="fa-solid fa-pen"></i></button>
+                        <form asp-action="Delete" asp-route-id="@g.Id" method="post" class="inline-form" data-confirm="Delete '@g.Name' and all of its accounts?">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-lms-body">
+                    <form asp-action="Update" asp-route-id="@g.Id" method="post" class="collapse mb-3" id="edit-@g.Id">
+                        <div class="row g-2">
+                            <div class="col-md-4"><input name="name" value="@g.Name" class="form-control" required /></div>
+                            <div class="col-md-6"><input name="description" value="@g.Description" class="form-control" placeholder="Instructions for students" /></div>
+                            <div class="col-md-2"><button type="submit" class="btn btn-brand w-100">Save</button></div>
+                        </div>
+                    </form>
+                    @if (!string.IsNullOrEmpty(g.Description)) { <p class="text-muted">@g.Description</p> }
+                    <table class="table table-sm">
+                        <thead><tr><th>Type</th><th>Number</th><th>Branch</th><th>Note</th><th></th></tr></thead>
+                        <tbody>
+                            @foreach (var a in g.GetwayInfo)
+                            {
+                                <tr>
+                                    <td>@a.Name</td>
+                                    <td class="fw-semibold">@a.No</td>
+                                    <td>@a.Branch</td>
+                                    <td class="text-muted">@a.Description</td>
+                                    <td class="text-end">
+                                        <form asp-action="DeleteAccount" asp-route-id="@a.Id" method="post" class="inline-form" data-confirm="Remove this account?">
+                                            <button type="submit" class="btn btn-sm btn-link text-danger p-0"><i class="fa-solid fa-xmark"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                            @if (!g.GetwayInfo.Any()) { <tr><td colspan="5" class="text-muted">No accounts yet — students won't know where to pay.</td></tr> }
+                        </tbody>
+                    </table>
+                    <form asp-action="AddAccount" method="post" class="row g-2">
+                        <input type="hidden" name="gatewayId" value="@g.Id" />
+                        <div class="col-md-3"><input name="name" class="form-control form-control-sm" placeholder="Type (Personal / Merchant)" required /></div>
+                        <div class="col-md-3"><input name="no" class="form-control form-control-sm" placeholder="Account / mobile number" required /></div>
+                        <div class="col-md-2"><input name="branch" class="form-control form-control-sm" placeholder="Branch" /></div>
+                        <div class="col-md-2"><input name="description" class="form-control form-control-sm" placeholder="Note" /></div>
+                        <div class="col-md-2"><button type="submit" class="btn btn-sm btn-outline-brand w-100"><i class="fa-solid fa-plus"></i> Add</button></div>
+                    </form>
+                </div>
+            </div>
+        }
+        @if (!Model.Any())
+        {
+            <div class="card-lms"><div class="empty-state"><i class="fa-solid fa-wallet"></i>No payment methods yet. Add bKash, Nagad, Rocket or a bank account.</div></div>
+        }
+    </div>
+    <div class="col-lg-4">
+        <div class="card-lms">
+            <div class="card-lms-header"><h5><i class="fa-solid fa-plus me-2 text-brand"></i>Add payment method</h5></div>
+            <div class="card-lms-body">
+                <form asp-action="Create" method="post">
+                    <div class="mb-3"><label class="form-label" for="pmName">Name</label><input class="form-control" id="pmName" name="name" placeholder="e.g. bKash" required /></div>
+                    <div class="mb-3"><label class="form-label" for="pmDesc">Instructions</label><textarea class="form-control" id="pmDesc" name="description" rows="3" placeholder="e.g. Send Money and keep the Transaction ID"></textarea></div>
+                    <button type="submit" class="btn btn-brand w-100">Add method</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+@model CourseCategory
+@{
+    ViewData["Title"] = "Edit Category";
+}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card-lms">
+            <div class="card-lms-header"><h5>Edit category</h5></div>
+            <div class="card-lms-body">
+                <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                    <div asp-validation-summary="ModelOnly" class="mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <button type="submit" class="btn btn-brand px-4">Save</button>
+                    <a asp-action="Index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

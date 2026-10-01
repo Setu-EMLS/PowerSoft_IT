@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using PowerSoft_IT.Models;
-using PowerSoft_IT.Services.Interfaces;
+using EduLearn.Models;
+using EduLearn.Services.Interfaces;
 
-namespace PowerSoft_IT.Services.Implementations
+namespace EduLearn.Services.Implementations
 {
 	public class IdentityService : Controller, IIdentityService
 	{
@@ -20,11 +20,12 @@ namespace PowerSoft_IT.Services.Implementations
 			var claims = new List<Claim>
 			{
 				new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-				new Claim(ClaimTypes.Name, user.FullName),
+				new Claim(ClaimTypes.Name, string.IsNullOrWhiteSpace(user.FullName) ? user.Email : user.FullName),
 				new Claim(ClaimTypes.Email, user.Email),
-				new Claim(ClaimTypes.Role, user.RoleId.ToString()),
-				new Claim("RoleName", user.RoleId == 1 ? "Admin" :
-									 user.RoleId == 2 ? "Teacher" : "Student")
+				// Role holds the role name so [Authorize(Roles = "Admin")] works
+				new Claim(ClaimTypes.Role, RoleIds.Name(user.RoleId)),
+				new Claim("RoleId", user.RoleId.ToString()),
+				new Claim("RoleName", RoleIds.Name(user.RoleId))
 			};
 
 			var identity = new ClaimsIdentity(claims, "MyCookieAuth"); // Match this

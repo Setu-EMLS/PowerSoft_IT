@@ -1,73 +1,44 @@
-﻿<main class="main">
+@{
+    ViewData["Title"] = "Products";
+    ViewData["Description"] = "Ready-made software from EduLearn: real estate websites, LMS platforms for training institutes and blood donation management systems.";
+    var products = new (string Title, string Image, string Tag, string Text)[]
+    {
+        ("Real-estate Website Design", "/Images/product/Redfinwebsite.webp", "Website", "A responsive, dynamic real estate portal with listings, agent profiles, map integration and an admin dashboard."),
+        ("Amin Survey Training Institute", "/Images/product/AminSurveyTrainingInstitute.jpeg", "LMS", "A custom LMS platform for survey training, including course videos, assessments and certification."),
+        ("Blood Donation Management", "/Images/product/BloodDonationManagement.jpeg", "Healthcare", "An online blood bank system for donor registration, search and emergency request management.")
+    };
+}
+<partial name="_PageHero" model="@(new PageHero("Our products", "Explore professional software and training solutions crafted by EduLearn for the digital future.", null, ("Products", null)))" />
 
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-        <div class="heading">
-            <div class="container">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <h1> Enjoy Powersoft IT's Amazing Products</h1>
-                        <p class="mb-0">Explore our professional software and training solutions crafted for the digital future</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current">Product</li>
-                </ol>
-            </div>
-        </nav>
-    </div><!-- End Page Title -->
-    <!-- Products Grid -->
-    <section class="products py-5">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Product 1: Real-estate Website Design -->
-                <div class="col-md-4">
-                    <a href="/ProductDetails">
-                    <div class="card h-100 shadow">         
-                        <img src="./Images/product/Redfinwebsite.webp" class="card-img-top" alt="Real Estate Website Design">
-                        <div class="card-body">
-                            <h5 class="card-title">Real-estate Website Design</h5>
-                            <p class="card-text">A responsive, dynamic real-estate portal with listings, agent profiles, map integration, and admin dashboard.</p>
-                            <a href="/ProductDetails" class="btn btn-primary btn-sm">View Details</a>
+<section class="ps-section">
+    <div class="container">
+        <div class="row g-4">
+            @for (var i = 0; i < products.Length; i++)
+            {
+                var p = products[i];
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(i * 80)">
+                    <a href="/ProductDetails" class="product-card">
+                        <div class="thumb"><img src="@p.Image" alt="@p.Title" loading="lazy" /></div>
+                        <div class="body">
+                            <span class="badge-soft ic-orange align-self-start mb-3">@p.Tag</span>
+                            <h3>@p.Title</h3>
+                            <p>@p.Text</p>
+                            <span class="link-arrow">View details <i class="bi bi-arrow-right"></i></span>
                         </div>
-                    </div>
                     </a>
                 </div>
-
-                <!-- Product 2: Amin Survey Training Institute -->
-                <div class="col-md-4">
-                    <a href="/ProductDetails">
-                    <div class="card h-100 shadow">
-                        <img src="./Images/product/AminSurveyTrainingInstitute.jpeg" class="card-img-top" alt="Amin Survey Training Institute">
-                        <div class="card-body">
-                            <h5 class="card-title">Amin Survey Training Institute</h5>
-                            <p class="card-text">Custom LMS platform for survey training including course videos, assessments, and certification.</p>
-                            <a href="/ProductDetails" class="btn btn-primary btn-sm">View Details</a>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-
-                <!-- Product 3: Blood Donation Platform -->
-                <div class="col-md-4">
-                    <a href="/ProductDetails">
-                    <div class="card h-100 shadow">
-                        <img src="./images/product/BloodDonationManagement.jpeg" class="card-img-top" alt="Blood Donation System">
-                        <div class="card-body">
-                            <h5 class="card-title">Blood Donation Management</h5>
-                            <p class="card-text">Online blood bank system for donor registration, search, and emergency request management.</p>
-                            <a href="/ProductDetails" class="btn btn-primary btn-sm">View Details</a>
-                        </div>                      
-                    </div>
-                    </a>
-                </div>
-
-            </div>
+            }
         </div>
-    </section>
-</main>
+
+        <div class="ps-card mt-5 d-flex flex-wrap justify-content-between align-items-center gap-3" data-aos="fade-up">
+            <div class="d-flex align-items-center gap-3">
+                <span class="ic ic-blue d-inline-flex align-items-center justify-content-center rounded-4" style="width:56px;height:56px;font-size:1.5rem"><i class="bi bi-lightbulb"></i></span>
+                <div>
+                    <h4 class="mb-1">Need something custom?</h4>
+                    <p class="mb-0 text-muted-ps">We can tailor any product to your brand, or build a new one from scratch.</p>
+                </div>
+            </div>
+            <a href="/ContactUs?subject=Custom%20product" class="btn-ps">Talk to our team <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,13 @@
+@model PersonFormViewModel
+@{
+    ViewData["Title"] = "My Profile";
+    ViewData["ShowPassword"] = false;
+    ViewData["EmailReadonly"] = true;
+    ViewData["ShowDesignation"] = true;
+    ViewData["ShowFamily"] = false;
+}
+<form asp-action="Index" method="post" enctype="multipart/form-data">
+    <partial name="_PersonForm" model="Model" view-data="ViewData" />
+    <button type="submit" class="btn btn-brand px-4">Save profile</button>
+    <a href="/Home/ChangePassword" class="btn btn-outline-secondary"><i class="fa-solid fa-key me-1"></i>Change password</a>
+</form>
